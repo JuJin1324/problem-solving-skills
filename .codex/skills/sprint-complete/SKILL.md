@@ -3,7 +3,7 @@ name: sprint-complete
 description: "Sprint를 완료하고 회고(Retrospective)를 작성합니다. Sprint Metrics를 계산하고, 잘된 점/아쉬운 점/개선 사항을 정리합니다."
 ---
 
-# Sprint Complete
+# 스프린트 완료
 
 ## 목적
 

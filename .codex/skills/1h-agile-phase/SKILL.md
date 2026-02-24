@@ -3,7 +3,7 @@ name: 1h-agile-phase
 description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로 구조화하는 도구. 문제 해결 과정 시각화를 통한 범위/단계 통제."
 ---
 
-# 1H Agile Phase (How 구조화 + 단계 설정)
+# 1H 애자일 페이즈 (How 구조화 + 단계 설정)
 
 ## 목적
 

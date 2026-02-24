@@ -3,7 +3,7 @@ name: sprint-start
 description: "새로운 Sprint를 시작하고 계획을 생성합니다. 2w-brainstorm.md와 how-diagram.md(Phase)를 기반으로 Sprint Goal과 Tasks를 제안하고, 사용자 확정 후 공식 시작합니다."
 ---
 
-# Sprint Start
+# 스프린트 시작
 
 ## 목적
 
