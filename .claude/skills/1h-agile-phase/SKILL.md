@@ -1,6 +1,9 @@
 ---
 name: 1h-agile-phase
 description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로 구조화하는 도구. 문제 해결 과정 시각화를 통한 범위/단계 통제."
+allowed-tools: Read,Write,Edit,Glob,Grep
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # 1H Agile Phase (How 구조화 + 단계 설정)
@@ -34,6 +37,27 @@ description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로
 | **평가 (Metrics)** | 정량/정성 지표 | 완성 기준 |
 
 **참고:** 구체적인 **Sprint 계획(시간 통제)**은 `/sprint-start` 스킬에서 담당합니다.
+
+---
+
+## 공통 출력 규칙 (Quick Guide + Intent/Review/Cleanup)
+
+`how-diagram.md` 초안은 본문 앞에 `Quick Guide`를 포함해 리뷰 기준을 먼저 고정합니다.
+
+**Quick Guide 필수 구성 (최대 8줄):**
+1. 문서 목적 1문장
+2. 이번에 확인할 것 3가지 (범위, 우선순위, 실행 가능성)
+3. 위험 신호 2가지
+4. 5분 리뷰 순서 3-step
+
+**Intent/판단 근거 규칙:**
+- 범위 확정(In/Out/Deferred)과 Phase 분리는 선택 이유를 1줄로 남깁니다.
+- 지표 선택 시 핵심 가정 또는 기준값 근거를 짧게 표시합니다.
+
+**Review/Cleanup 규칙:**
+1. 초안에는 Quick Guide와 의도/근거를 포함해 리뷰를 요청합니다.
+2. 리뷰 반영 후 최종본에서는 임시 해설 문구를 제거하거나 최소 요약만 남깁니다.
+3. 최종 문서는 다이어그램/범위/로드맵/지표 중심으로 정리합니다.
 
 ---
 
@@ -182,6 +206,17 @@ Phase 2: [기능 확장 / 안정화]
 
 ```markdown
 # [문제명] - How 구조화
+
+## Quick Guide (30초 리뷰 가이드)
+- 목적: 이번 문서의 범위/단계/지표가 실행 가능한지 빠르게 검증한다.
+- 확인1(범위): In/Out/Deferred가 명확한가?
+- 확인2(우선순위): Phase 순서와 의존 관계가 타당한가?
+- 확인3(실행 가능성): 현재 제약에서 달성 가능한가?
+- 위험1: 범위가 과도해 MVP 경계가 흐려지는가?
+- 위험2: 지표가 모호해 완료 판단이 어려운가?
+- 5분 순서: 범위 확인 → Phase 확인 → 지표 확인
+
+---
 
 ## 2W 요약 (from 2w-brainstorm.md)
 - **What:** [문제 정의]

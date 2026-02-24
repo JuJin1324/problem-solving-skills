@@ -124,8 +124,8 @@ Pre-Review Quick Guide (문서 읽기 전 30초 가이드)
 
 | ID | 작업 항목 | 관련 Skill | 우선순위 | 상태 (Todo/In Progress/Done) |
 |---|---|---|---|---|
-| SI-001 | Quick Guide 공통 템플릿 정의 및 자동 생성 규칙 추가 | 공통, sprint-start, 1h-agile-phase | H | Todo |
-| SI-002 | `US Summary`/`Step Summary` 중복 항목 제거 기준 적용 | sprint-start | H | Todo |
+| SI-001 | Quick Guide 공통 템플릿 정의 및 자동 생성 규칙 추가 | 공통, sprint-start, 1h-agile-phase | H | Done |
+| SI-002 | `US Summary`/`Step Summary` 중복 항목 제거 기준 적용 | sprint-start | H | Done |
 
 ## 5. 검증 기준
 
@@ -135,4 +135,15 @@ Pre-Review Quick Guide (문서 읽기 전 30초 가이드)
 
 ## 6. 메모
 
-- 
+- 2026-02-24: SI-001 적용 완료
+  - `.codex/skills/sprint-start/SKILL.md`: Quick Guide 표준, Intent/판단 근거, Review/Cleanup 루프 추가
+  - `.codex/skills/1h-agile-phase/SKILL.md`: Quick Guide 표준, 범위/지표 근거 표기, Review/Cleanup 루프 추가
+  - `how-diagram.md`/`plan` 템플릿에 Quick Guide 선행 섹션 반영
+- 2026-02-24: SI-002 적용 완료
+  - `.codex/skills/sprint-start/SKILL.md`: `US Summary`를 `Step Evidence Log`로 전환
+  - Quick Guide와 중복되는 이해 보조/피드백 유도 섹션 제거
+  - 로그는 증적/메트릭/결정 기록 중심으로 축소
+- 2026-02-24: 멀티 에이전트 동기화 완료
+  - `.claude/skills/sprint-start/SKILL.md`, `.claude/skills/1h-agile-phase/SKILL.md` 동기화
+  - `.gemini/skills/sprint-start/SKILL.md`, `.gemini/skills/1h-agile-phase/SKILL.md` 동기화
+  - 4개 경로 모두 `quick_validate.py` 통과

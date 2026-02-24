@@ -1,6 +1,9 @@
 ---
 name: sprint-status
 description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다. 완료/진행 중/대기 중 태스크를 집계하고 진행률을 계산합니다."
+allowed-tools: Read,Glob,Grep,Bash
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # Sprint Status

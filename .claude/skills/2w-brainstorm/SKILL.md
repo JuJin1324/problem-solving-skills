@@ -1,6 +1,9 @@
 ---
 name: 2w-brainstorm
 description: "문제를 만났을 때 How부터 시작하지 않고 What/Why를 먼저 묻는 브레인스토밍 도구. 새 문제 정의, 모호한 개념 해체, 잘못된 접근 재정의 시 사용하세요."
+allowed-tools: Read,Write,Edit,Glob,Grep
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # 2W Problem Definition (What/Why)
