@@ -184,9 +184,19 @@ Sprint N
 - 현재 Sprint 완료를 먼저 권장
 - 사용자가 강제로 시작을 선택할 수 있도록 옵션 제공
 
-### Step 2: Sprint 계획 초안 생성
+### Step 2: Sprint 브랜치 생성
 
-**2-1. 컨텍스트 수집:**
+- 다음 Sprint 번호 확인 (`current-sprint.txt + 1` → `N`)
+- 브랜치명 규칙: `sprint-{N}`
+- 브랜치 생성/전환:
+  - 브랜치가 없으면 `git checkout -b sprint-{N}`
+  - 이미 있으면 `git checkout sprint-{N}`
+- 이미 `sprint-{N}` 브랜치에 있으면 그대로 진행
+- 미커밋 변경이 많아 브랜치 전환 리스크가 있으면 사용자에게 확인 후 진행
+
+### Step 3: Sprint 계획 초안 생성
+
+**3-1. 컨텍스트 수집:**
 - **문서 탐색 순서:**
   1. 프로젝트 루트 (`./how-diagram.md`, `./2w-brainstorm.md`)
   2. `docs/planning/` 폴더
@@ -194,9 +204,8 @@ Sprint N
   - 다음 Sprint에 해당하는 Phase/Sprint 섹션 찾기
   - Phase의 목표와 산출물 파악
 - 📚 `2w-brainstorm.md` 확인 (배경 컨텍스트 - 참고용)
-- 다음 Sprint 번호 확인 (current-sprint.txt + 1)
 
-**2-2. Sprint 계획 초안 제안 (타임박싱):**
+**3-2. Sprint 계획 초안 제안 (타임박싱):**
 - 파일 경로: `.agile/sprints/sprint-N/plan-draft.md`
 - **how-diagram.md의 Phase를 Sprint로 타임박싱**
   - Phase의 논리적 목표 → Sprint Goal
@@ -213,9 +222,10 @@ Sprint N
   - US 구조 (복잡한 Sprint의 경우)
   - Definition of Done
 
-**2-3. 사용자 검토 요청:**
+**3-3. 사용자 검토 요청:**
 ```
 📝 Sprint N 계획 초안을 생성했습니다.
+🌿 작업 브랜치: sprint-N
 
 📂 파일 위치: .agile/sprints/sprint-N/plan-draft.md
 
@@ -231,14 +241,14 @@ Sprint N
 3. 계획 수정 필요 (다시 논의)
 ```
 
-### Step 3: 사용자 확정 대기
+### Step 4: 사용자 확정 대기
 
 **사용자 선택:**
 - **1번 선택:** plan-draft.md를 plan.md로 rename, Sprint 시작
 - **2번 선택:** 사용자가 파일 수정 후 확정 명령 입력 대기
 - **3번 선택:** 대화형으로 수정 사항 수집 후 다시 초안 생성
 
-### Step 4: Sprint 시작 확정
+### Step 5: Sprint 시작 확정
 
 **확정 후:**
 - `plan-draft.md` → `plan.md` 로 rename
@@ -251,6 +261,7 @@ Sprint N
 ✅ Sprint N이 공식 시작되었습니다!
 
 📋 Sprint Goal: [목표]
+🌿 브랜치: sprint-N
 📅 기간: {시작일} ~ {종료일} (N일)
 📝 태스크: M개
 
@@ -485,6 +496,7 @@ ADR은 **아키텍처 고민이 발생한 시점에 자연스럽게 작성**:
 ## ✅ AI가 해야 할 것
 
 - `.agile/` 구조 자동 생성
+- 다음 Sprint 번호 기준 브랜치(`sprint-N`) 생성/전환
 - `how-diagram.md` (루트/docs) 기반 Sprint 계획 초안 생성
 - 템플릿 자동 제공
 - 사용자 선택에 따라 파일 rename 및 Sprint 시작
@@ -494,6 +506,7 @@ ADR은 **아키텍처 고민이 발생한 시점에 자연스럽게 작성**:
 
 - 사용자 대신 Sprint Goal 결정
 - 사용자 대신 태스크 생성 (초안 제안은 OK, 강요는 NO)
+- 사용자 동의 없이 위험한 브랜치 전환 강행
 - 사용자 동의 없이 Sprint 시작
 - plan.md 파일을 사용자 동의 없이 수정
 - Quick Guide와 중복되는 설명용 Summary를 강제 생성
@@ -510,9 +523,13 @@ Sprint 시작 후 사용자가 할 일:
 
 ---
 
-**버전:** 3.3.0
-**최종 업데이트:** 2026-02-25
+**버전:** 3.4.0
+**최종 업데이트:** 2026-02-26
 **변경 사항:**
+- **v3.4.0:** Sprint 착수 절차 강화 — 계획 수립 전 스프린트 브랜치 선생성
+  - Step 2에 `sprint-N` 브랜치 생성/전환 절차 추가
+  - 계획 초안/시작 완료 메시지에 작업 브랜치 정보 추가
+  - AI 수행/금지 항목에 브랜치 전환 안전 규칙 반영
 - **v3.3.0:** US 일정 가시성 강화 — plan.md에서 US별 완료 목표일 관리
   - US 템플릿에 `완료 목표일` 필드 추가
   - "Sprint 흐름 요약" 표에 `완료 목표일` 컬럼 추가
