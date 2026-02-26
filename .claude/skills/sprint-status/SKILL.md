@@ -1,6 +1,9 @@
 ---
 name: sprint-status
-description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다. 완료/진행 중/대기 중 태스크를 집계하고 진행률을 계산합니다."
+description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다. 완료/진행 중/대기 중 태스크와 US 일정 상태(Ahead/On-track/Delayed)를 집계합니다."
+allowed-tools: Read,Glob,Grep,Bash
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # Sprint Status
@@ -18,6 +21,7 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
 - ✅ 진행률 시각화 → 명확한 현황 파악
 - ✅ 태스크 상태 집계 → 다음 할 일 명확
 - ✅ 남은 기간 확인 → 시간 관리
+- ✅ US 일정 상태 집계 → 선행/정시/지연 판단
 
 ---
 
@@ -59,6 +63,11 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
 - Sprint 시작일/종료일 파싱
 - 남은 기간 계산
 
+**US 일정 상태 집계:**
+- 각 US의 `완료 목표일` 파싱 (`**완료 목표일:** YYYY-MM-DD`)
+- 오늘 날짜(로컬 기준)와 비교해 상태 분류
+- 상태별 개수 집계 (Ahead / On-track / Delayed)
+
 ### Step 3: 시각화 출력
 
 ```
@@ -67,6 +76,7 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
 🎯 Goal: [Sprint 목표]
 📅 기간: {시작일} ~ {종료일}
 ⏰ 남은 기간: X일
+🗓️ US 일정 상태: Ahead 1 | On-track 2 | Delayed 1
 
 📈 Progress: ████████░░ 60% (3/5)
 
@@ -85,6 +95,23 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
 
 💡 Tip: plan.md 파일을 직접 수정해서 진행 상황을 업데이트하세요!
      완료한 태스크는 [ ]를 [x]로 변경하면 됩니다.
+```
+
+### US 일정 상태 (신규)
+
+US 구조와 `완료 목표일`이 있으면 아래를 추가 출력:
+
+```markdown
+🗓️ US Schedule Status (기준일: YYYY-MM-DD)
+- Ahead: 1
+- On-track: 2
+- Delayed: 1
+
+| US | 완료 목표일 | 상태 |
+|----|----|----|
+| US-3.1 | 2026-02-24 | Ahead |
+| US-3.2 | 2026-02-25 | On-track |
+| US-3.3 | 2026-02-23 | Delayed |
 ```
 
 ---
@@ -119,6 +146,25 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
 ```markdown
 - [ ] 태스크 이름
 ```
+
+---
+
+## US 일정 상태 판정 규칙
+
+### 입력 규칙
+```markdown
+### US-{N}.{M}: {목표}
+**완료 목표일:** {YYYY-MM-DD}
+```
+
+### 판정 기준 (기준일 = `/sprint-status` 실행일)
+- `Ahead`: 해당 US가 완료(`US 섹션 내 체크리스트 모두 [x]` 또는 `US 제목에 ✅`)되었고 완료 목표일 이전에 끝난 상태
+- `On-track`: 완료 목표일이 오늘 이후이면서 US가 미완료인 상태, 또는 완료 목표일 당일에 완료된 상태
+- `Delayed`: 완료 목표일이 지났는데 US가 미완료인 상태
+
+### 예외 처리
+- 완료 목표일 누락 시 해당 US는 일정 집계에서 제외하고 `Unknown`으로 표시
+- 날짜 형식 오류 시 해당 US는 `Unknown`으로 표시하고 파싱 경고를 함께 출력
 
 ---
 
@@ -245,6 +291,8 @@ plan.md에 Blockers 섹션이 있으면:
 - 태스크 상태 집계 (Completed, In Progress, To Do)
 - 진행률 계산 및 Progress Bar 생성
 - 남은 기간 계산
+- US 완료 목표일 파싱 및 일정 상태 분류 (Ahead/On-track/Delayed)
+- US 일정 상태 집계 출력 (필요 시 Unknown 포함)
 - 시각화된 현황 출력
 
 ## ❌ AI가 하지 말아야 할 것
@@ -266,8 +314,12 @@ plan.md에 Blockers 섹션이 있으면:
 
 ---
 
-**버전:** 3.0.0
-**최종 업데이트:** 2026-02-09
+**버전:** 3.1.0
+**최종 업데이트:** 2026-02-25
 **변경 사항:**
+- **v3.1.0:** US 일정 추적 추가
+  - `plan.md`의 `완료 목표일` 기반으로 US 상태(Ahead/On-track/Delayed) 자동 분류
+  - 상태별 집계와 US별 일정 상태 표 출력 포맷 추가
+  - 목표일 누락/형식 오류 시 `Unknown` 처리 규칙 추가
 - **Breaking:** Iteration 중간 계층 제거, Sprint > US 2단계 구조로 단순화
 - US별 진행 상황 표시로 변경

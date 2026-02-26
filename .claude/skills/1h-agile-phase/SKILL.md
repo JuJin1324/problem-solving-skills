@@ -1,7 +1,11 @@
 ---
 name: 1h-agile-phase
 description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로 구조화하는 도구. 문제 해결 과정 시각화를 통한 범위/단계 통제."
+allowed-tools: Read,Write,Edit,Glob,Grep
+disable-model-invocation: false
+user-invocable: true
 ---
+
 
 # 1H Agile Phase (How 구조화 + 단계 설정)
 
@@ -34,6 +38,28 @@ description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로
 | **평가 (Metrics)** | 정량/정성 지표 | 완성 기준 |
 
 **참고:** 구체적인 **Sprint 계획(시간 통제)**은 `/sprint-start` 스킬에서 담당합니다.
+
+---
+
+## 공통 출력 규칙 (Quick Guide + Intent/Review/Cleanup)
+
+`how-diagram.md` 초안은 본문 앞에 `Quick Guide`를 포함해 리뷰 기준을 먼저 고정합니다.
+
+**Quick Guide 필수 구성 (최대 8줄, 내용 파악 중심):**
+1. 이번 문서의 핵심 결론 1문장
+2. 확정된 범위/단계/지표 결정 2~3개
+3. 실행에 바로 영향 주는 항목 2~3개
+4. 핵심 가정/근거 1~2개
+5. 미확정 항목/리스크 1~2개
+
+**Intent/판단 근거 규칙:**
+- 범위 확정(In/Out/Deferred)과 Phase 분리는 선택 이유를 1줄로 남깁니다.
+- 지표 선택 시 핵심 가정 또는 기준값 근거를 짧게 표시합니다.
+
+**Review/Cleanup 규칙:**
+1. 초안에는 Quick Guide와 의도/근거를 포함해 리뷰를 요청합니다.
+2. 리뷰 반영 후 최종본에서는 임시 해설 문구를 제거하거나 최소 요약만 남깁니다.
+3. 최종 문서는 다이어그램/범위/로드맵/지표 중심으로 정리합니다.
 
 ---
 
@@ -182,6 +208,16 @@ Phase 2: [기능 확장 / 안정화]
 
 ```markdown
 # [문제명] - How 구조화
+
+## Quick Guide (30초 문서 이해 가이드)
+- 핵심 결론: 2W 기준으로 이번 실행 범위와 Phase 순서, 완료 지표를 확정한다.
+- 확정된 결정: In/Out/Deferred 항목, Phase 경계, 정량/정성 지표 목표값.
+- 바로 실행할 내용: Phase 1 시작 범위, 첫 Sprint로 넘길 산출물, 측정 방식 합의.
+- 판단 근거: What/Why 제약과 다이어그램 흐름을 기준으로 범위를 분리했다.
+- 미확정/리스크: 근거 없는 Deferred, 측정 불가능한 지표, 2W와 불일치한 범위.
+- 리뷰 요청 포인트: In/Out/Deferred 타당성과 핵심 지표의 측정 가능성만 먼저 확정한다.
+
+---
 
 ## 2W 요약 (from 2w-brainstorm.md)
 - **What:** [문제 정의]

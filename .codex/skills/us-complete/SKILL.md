@@ -3,7 +3,7 @@ name: us-complete
 description: "US(User Story) 완료 시 summary 문서를 작성하고 커밋을 요청합니다."
 ---
 
-# US Complete
+# US 완료
 
 ## 목적
 
