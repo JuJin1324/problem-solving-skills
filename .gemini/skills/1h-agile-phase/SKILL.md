@@ -1,6 +1,9 @@
 ---
 name: 1h-agile-phase
 description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로 구조화하는 도구. 문제 해결 과정 시각화를 통한 범위/단계 통제."
+allowed-tools: Read,Write,Edit,Glob,Grep
+disable-model-invocation: false
+user-invocable: true
 ---
 
 
@@ -98,9 +101,14 @@ description: "2W(What/Why) 정의 후 How를 Mermaid 다이어그램과 Phase로
 |----------|------------------|------|
 | 프로세스/흐름 | Flowchart | 문제 해결 단계 시각화 |
 | 시스템 상호작용 | Sequence | API 호출, 컴포넌트 통신 |
-| 아키텍처 | C4 Context/Container | 시스템 구조 설계 |
+| 아키텍처 | Flowchart + subgraph (C4 다이어그램 스타일) | 시스템 구조 설계 |
 | 데이터 구조 | ER Diagram | 도메인 모델, DB 설계 |
 | 상태 변화 | State Diagram | 상태 머신, 워크플로우 |
+
+**⚠️ C4 다이어그램 작성 시 주의:**
+- Mermaid의 `C4Container`, `C4Context` 문법은 IDE(IntelliJ 등) 렌더링 호환성이 낮음
+- 대신 `flowchart` + `subgraph`로 C4 다이어그램 스타일을 표현하면 가독성이 훨씬 좋음
+- 예: `subgraph boundary["시스템 경계"]` 안에 컴포넌트를 배치하는 방식
 
 #### 1.3 Mermaid 다이어그램 생성
 
