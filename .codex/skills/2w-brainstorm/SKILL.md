@@ -1,9 +1,6 @@
 ---
 name: 2w-brainstorm
 description: "문제를 만났을 때 How부터 시작하지 않고 What/Why를 먼저 묻는 브레인스토밍 도구. 새 문제 정의, 모호한 개념 해체, 잘못된 접근 재정의 시 사용하세요."
-allowed-tools: Read,Write,Edit,Glob,Grep
-disable-model-invocation: false
-user-invocable: true
 ---
 
 # 2W Problem Definition (What/Why)
@@ -232,6 +229,24 @@ user-invocable: true
    - 다이어그램에 반영할 아키텍처 패턴
    - 평가 지표에 반영할 측정 항목
    - In/Out/Deferred 범위에 반영할 사항
+
+4. **사례를 의사결정 근거로 직접 활용**
+
+   > 사례 연구는 단순한 참고 자료가 아니라 **기술 선택과 범위 결정의 직접적 근거**가 된다.
+   > "왜 이렇게 결정했는가?"에 대해 "X 기업이 Y 상황에서 Z 결과를 얻었다"로 답할 수 있어야 한다.
+
+   - **기술 선택 근거**: 사례의 성공/실패가 기술 채택/제외의 이유가 됨
+   - **범위 제외 근거**: 사례에서 전담팀/높은 학습 비용이 필요했다면 PoC 범위 밖으로 판단
+   - **지표 선정 근거**: 사례에서 실제로 측정한 지표와 방식을 PoC 평가 지표에 채택
+   - **ADR 근거**: 사례의 트레이드오프가 ADR(Architecture Decision Records)의 Why에 직접 인용됨
+
+   **실제 예시 (EDA PoC):**
+   | 사례 근거 | 의사결정 |
+   |----------|---------|
+   | 배민이 Exactly Once를 안정성 위해 제거 | → At Least Once + 멱등성 선택 (ADR) |
+   | 배민도 Debezium에 전담팀 필요 | → Kafka Connect는 PoC 범위 밖 (Out of Scope) |
+   | 올리브영이 DB 호출 86% 감소를 측정 | → Before/After 비교 방식으로 지표 설계 |
+   | 쿠팡의 Cascading Failure 문제 | → 장애 격리 테스트를 핵심 검증 항목에 포함 |
 
 **실제 예시 (EDA PoC):**
 
