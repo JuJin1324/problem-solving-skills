@@ -32,4 +32,3 @@ bash .gemini/skills/agent-skill-sync/scripts/sync_to_gemini.sh \
 git status --short
 sed -n '1,20p' .gemini/skills/<skill-name>/SKILL.md
 ```
-
