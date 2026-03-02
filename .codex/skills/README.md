@@ -10,6 +10,7 @@
 - `sprint-status`: Sprint 진행 현황 집계
 - `sprint-complete`: Sprint 회고/완료 정리
 - `us-complete`: US 완료 요약 및 커밋 가이드
+- `adr`: Architecture Decision Record 생성/관리
 - `agent-skill-sync`: 다른 에이전트 스킬을 Codex 형식으로 동기화
 
 ## 형식 규칙
