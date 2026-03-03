@@ -19,4 +19,5 @@
 
 ## Codex Skill Location
 - Codex 스킬 경로: `.codex/skills/<skill-name>/SKILL.md`
+- 레거시 Codex 스킬 경로: `.codex/skills-legacy/<skill-name>/SKILL.md` (기본 미사용)
 - 스킬 결과는 문서(`*.md`) 중심으로 남기고, Sprint 산출물은 `.agile/loops/loop-vN/sprint/`에 기록한다.

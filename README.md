@@ -16,15 +16,17 @@
 
 ## 디렉터리 구조
 - `.claude/skills/`: Claude Code 스킬 (`<skill>/SKILL.md`)
-- `.codex/skills/`: Codex 스킬 (`<skill>/SKILL.md`)
+- `.codex/skills/`: Codex 활성(Active) 스킬 (`<skill>/SKILL.md`)
+- `.codex/skills-legacy/`: Codex 레거시(Deprecated) 스킬
 - `.gemini/skills/`: Gemini 스킬 (`<skill>/SKILL.md`)
 - `.gemini/commands/`: Gemini 커스텀 커맨드 (`*.toml`)
-- `templates/`: 공통 템플릿 (예: `questions.md`)
+- `templates/`: 레거시 호환 템플릿
 - `scripts/sync-skills.sh`: 기존 작업공간 스킬 동기화 스크립트
 
 ## 포함 스킬
 - 메인 워크플로우: `define-2w`, `design-phase`, `plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`
-- 보조/호환: `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`, `adr`, `agent-skill-sync`
+- 보조/운영: `adr`, `agent-skill-sync`
+- 레거시(별도 경로): `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`
 
 ## 도구별 사용
 - Claude Code: `.claude/skills`의 스킬 이름으로 호출

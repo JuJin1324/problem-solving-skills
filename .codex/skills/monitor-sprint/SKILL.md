@@ -307,7 +307,7 @@ sprint-plan.md에 Blockers 섹션이 있으면:
 
 1. **sprint-plan.md 파일 수정** - 완료한 태스크 체크
 2. **`/monitor-sprint`** - 다시 현황 확인
-3. **`/sprint-complete`** - Sprint 완료 시 회고 작성
+3. **`/plan-sprint`** - Sprint 완료/회고 및 다음 라운드 결정
 
 ---
 
