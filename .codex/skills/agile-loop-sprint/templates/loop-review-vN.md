@@ -27,8 +27,9 @@
 - 이유:
 
 ## Decision for Next Round
-- Next: `/agile-loop-2w` | `/agile-loop-1h` | 종료
+- Next: `/agile-loop-2w` | `/agile-loop-backlog` | `/agile-loop-1h` | 종료
 - 이유:
 - 다음 버전 파일:
   - 2W: `problems/[문제명]/2w-vN+1.md`
+  - Backlog: `problems/[문제명]/backlog-vN+1.md`
   - 1H: `problems/[문제명]/1h-vN+1.md`
