@@ -9,7 +9,7 @@
 
 ## 권장 흐름
 1. `define-2w`: 사용자 입력에서 What/Why를 역추출해 방향 확정
-2. `design-phase-us`: Phase+US/범위/지표 설계
+2. `design-phase`: Phase+US/범위/지표 설계
 3. `plan-sprint`: Sprint 계획(US/Step) 확정
 4. `design-implementation`: 구현 설계 산출물 작성
 5. `execute-implementation`: 코드 구현/검증/문서화
@@ -19,4 +19,4 @@
 
 ## Codex Skill Location
 - Codex 스킬 경로: `.codex/skills/<skill-name>/SKILL.md`
-- 스킬 결과는 문서(`*.md`) 중심으로 남기고, Sprint 산출물은 `.agile/sprints/`에 기록한다.
+- 스킬 결과는 문서(`*.md`) 중심으로 남기고, Sprint 산출물은 `.agile/loops/loop-vN/sprint/`에 기록한다.

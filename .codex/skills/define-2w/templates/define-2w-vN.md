@@ -1,4 +1,4 @@
-# 2W vN - [문제명]
+# Define 2W vN - [문제명]
 
 ## 빠른 안내
 - 핵심 결론:
@@ -42,7 +42,7 @@
 - 사용자 선택: 진행 | 생략
 
 ## 사례 연구 결과 연결 (실행 시)
-- 결과 파일: `problems/[문제명]/case-study-vN.md`
+- 결과 파일: `.agile/loops/loop-vN/define-2w-case-study.md`
 - 2W 반영 요약(최대 3줄):
 
 ## 결정
@@ -50,4 +50,4 @@
 - 결정 이유:
 
 ## 다음 단계 전달
-- 다음 스킬: `/design-phase-us` 또는 2W 재진입
+- 다음 스킬: `/design-phase` 또는 2W 재진입

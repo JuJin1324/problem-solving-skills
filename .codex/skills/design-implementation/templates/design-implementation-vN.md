@@ -7,7 +7,7 @@
 - 핵심 리스크:
 
 ## 기술 스택 문서
-- 경로: `problems/[문제명]/tech-stack.md`
+- 경로: `.agile/context/tech-stack.md`
 - 사용 방식: 기존 문서 재사용 | 일부 수정 | 신규 생성
 
 ## 대상 US

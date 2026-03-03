@@ -6,7 +6,7 @@
 
 ## 문제 해결 접근 방식 (Codex 권장)
 1. `define-2w`: 사용자 입력(주로 How)에서 What/Why를 역추출해 2W를 정의
-2. `design-phase-us`: 2W를 기반으로 Phase+US/범위/지표 설계
+2. `design-phase`: 2W를 기반으로 Phase+US/범위/지표 설계
 3. `plan-sprint`: 이번 Sprint의 US/Step 계획 확정
 4. `design-implementation`: 구현 설계(Sequence/Flowchart, C4 Container 선택)
 5. `execute-implementation`: 코드 구현 + 검증 + 실행 문서화
@@ -23,7 +23,7 @@
 - `scripts/sync-skills.sh`: 기존 작업공간 스킬 동기화 스크립트
 
 ## 포함 스킬
-- 메인 워크플로우: `define-2w`, `design-phase-us`, `plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`
+- 메인 워크플로우: `define-2w`, `design-phase`, `plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`
 - 보조/호환: `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`, `adr`, `agent-skill-sync`
 
 ## 도구별 사용

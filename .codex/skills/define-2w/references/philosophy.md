@@ -3,7 +3,7 @@
 ## 전체 워크플로우
 ```mermaid
 flowchart LR
-  A[프로젝트 설계<br/>2W로 방향 잡기] --> B[프로젝트 설계<br/>1H로 Phase/US 설계]
+  A[프로젝트 설계<br/>Define 2W로 방향 잡기] --> B[프로젝트 설계<br/>Design Phase로 Phase/US 설계]
   B --> C
   C[스프린트<br/>스프린트 설계] --> D[스프린트<br/>구현 설계]
   D --> E[스프린트<br/>구현 실행]
@@ -33,4 +33,4 @@ flowchart LR
 - 진행 시 최대 3개 사례, 사례당 3줄 요약, 별도 결과 파일로 증적을 남긴다.
 
 ## 완료의 의미
-- 2W 완료는 설계 종료가 아니라 `design-phase-us`로 넘어갈 준비 완료를 뜻한다.
+- 2W 완료는 설계 종료가 아니라 `design-phase`로 넘어갈 준비 완료를 뜻한다.

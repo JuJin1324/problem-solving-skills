@@ -28,7 +28,7 @@ Sprint를 공식적으로 완료하고, 회고를 통해 다음 Sprint에서 개
 ├── current-sprint.txt          # 현재 Sprint 번호 (완료 후 초기화)
 └── sprints/
     └── sprint-N/
-        ├── plan.md                       # Sprint 계획
+        ├── sprint-plan.md                       # Sprint 계획
         ├── us-{N.M}-retrospective.md     # US별 회고 (/us-complete, M=1,2,3...)
         └── sprint-retrospective.md              # Sprint 회고 (완료 후 생성, US 회고 집약)
 ```
@@ -58,7 +58,7 @@ Q: "Sprint N을 완료하시겠습니까? (y/n)"
 - 아쉬운 점 / 개선할 점
 
 이 내용을 Sprint 회고 작성의 입력으로 사용한다.
-US 회고가 없는 경우 plan.md 기반으로만 작성한다.
+US 회고가 없는 경우 sprint-plan.md 기반으로만 작성한다.
 
 ### Step 3: Sprint Metrics 계산
 
@@ -68,7 +68,7 @@ US 회고가 없는 경우 plan.md 기반으로만 작성한다.
 - 완료율 (%)
 - 예상 vs 실제 기간 (선택)
 
-**plan.md 파싱:**
+**sprint-plan.md 파싱:**
 ```markdown
 ## Tasks
 - [x] 완료 태스크 1
@@ -114,7 +114,7 @@ Q4: 한 문장으로 핵심 교훈을 요약하면?
 
 사용자가 "자동으로 작성해줘"를 선택하면:
 - `us-*-retrospective.md` 파일에서 배운 점/의사결정/아쉬운 점 수집
-- plan.md의 완료/미완료 태스크 + DoD 달성 여부 확인
+- sprint-plan.md의 완료/미완료 태스크 + DoD 달성 여부 확인
 - Blockers 섹션 내용 요약
 - US 회고들을 집약해 Sprint 회고 초안 생성 후 사용자 검토 요청
 
@@ -177,7 +177,7 @@ Q4: 한 문장으로 핵심 교훈을 요약하면?
 
 ## 2. Definition of Done 체크리스트
 
-{plan.md의 DoD 체크리스트 복사}
+{sprint-plan.md의 DoD 체크리스트 복사}
 
 ---
 
@@ -303,7 +303,7 @@ Q4: 한 문장으로 핵심 교훈을 요약하면?
 
 ### 2. 기간 계산
 
-**plan.md에서 파싱:**
+**sprint-plan.md에서 파싱:**
 ```markdown
 **기간:** 2026-01-06 ~ 2026-01-10 (5일)
 ```
@@ -355,7 +355,7 @@ Q4: 한 문장으로 핵심 교훈을 요약하면?
 
 ## ✅ AI가 해야 할 것
 
-- plan.md 파싱하여 Sprint Metrics 자동 계산
+- sprint-plan.md 파싱하여 Sprint Metrics 자동 계산
 - 회고 템플릿 제공
 - 대화형 질문으로 회고 가이드
 - sprint-retrospective.md 파일 생성
@@ -366,7 +366,7 @@ Q4: 한 문장으로 핵심 교훈을 요약하면?
 - 사용자 대신 회고 내용 작성 (초안 제안은 OK, 강요는 NO)
 - 사용자 평가나 조언 ("이번 Sprint는 잘했어요" 같은 것)
 - 임의로 Action Items 결정
-- plan.md 파일 수정
+- sprint-plan.md 파일 수정
 
 ---
 
@@ -387,7 +387,7 @@ Sprint 완료 후:
 - **v3.2.0:** US 회고 기반 Sprint 회고 구조로 전환
   - 파일 구조에 `us-{N.M}-retrospective.md` 추가
   - Step 2: US 회고 수집 단계 신규 추가 (`us-*-retrospective.md` → Sprint 회고 입력)
-  - 자동 회고: plan.md 기반 → US 회고 기반으로 전환
+  - 자동 회고: sprint-plan.md 기반 → US 회고 기반으로 전환
 - **v3.1.0:** Sprint > US > Step 3단계 구조 반영
   - DoD 파싱 예시를 Step 단위 체크박스 형식으로 변경
 - **v3.0.0:** Iteration 중간 계층 제거, Sprint > US > Step 3단계 구조

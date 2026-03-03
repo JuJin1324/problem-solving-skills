@@ -9,7 +9,7 @@
 
 ## Sprint Goal
 - 목표:
-- 대상 버전: 2W vN / 1H vN
+- 대상 버전: define-2w vN / design-phase vN
 
 ## US > Step Plan
 ### US-{N}.1: {목표}

@@ -1,4 +1,4 @@
-# Sprint Retrospective (Loop Review) vN - [문제명]
+# Sprint Retrospective vN - [문제명]
 
 ## Sprint Result Summary
 - Sprint 번호:
@@ -27,8 +27,8 @@
 - 이유:
 
 ## Decision for Next Round
-- Next: `/define-2w` | `/design-phase-us` | 종료
+- Next: `/define-2w` | `/design-phase` | 종료
 - 이유:
 - 다음 버전 파일:
-  - 2W: `problems/[문제명]/2w-vN+1.md`
-  - Phase/US: `problems/[문제명]/1h-vN+1.md`
+  - Define 2W: `.agile/loops/loop-vN+1/define-2w.md`
+  - Design Phase: `.agile/loops/loop-vN+1/design-phase.md`
