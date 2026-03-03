@@ -12,8 +12,8 @@
 - `design-test`: 테스트 구현 설계 전용 스킬 (케이스/우선순위/전략/환경)
 - `execute-test`: 테스트 구현 실행 전용 스킬 (실행/실패분석/재검증)
 - `monitor-sprint`: Sprint 진행 현황 집계
-- `adr`: Architecture Decision Record 생성/관리
-- `agent-skill-sync`: 다른 에이전트 스킬을 Codex 형식으로 동기화
+- `record-adr`: Architecture Decision Record 생성/관리
+- `sync-agent-skills`: 다른 에이전트 스킬을 Codex 형식으로 동기화
 
 ## Legacy Skills
 
@@ -37,4 +37,4 @@
 ## 동기화 메모
 
 - 공통 스킬 업데이트 시 `.claude/skills`, `.gemini/skills`와 함께 동기화합니다.
-- 대량 동기화는 `agent-skill-sync` 스킬의 스크립트를 사용합니다.
+- 대량 동기화는 `sync-agent-skills` 스킬의 스크립트를 사용합니다.

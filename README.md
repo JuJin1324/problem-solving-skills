@@ -25,7 +25,7 @@
 
 ## 포함 스킬
 - 메인 워크플로우: `define-2w`, `design-phase`, `plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`
-- 보조/운영: `adr`, `agent-skill-sync`
+- 보조/운영: `record-adr`, `sync-agent-skills`
 - 레거시(별도 경로): `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`
 
 ## 도구별 사용

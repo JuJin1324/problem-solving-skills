@@ -10,8 +10,8 @@
 - `sprint-status`: Sprint 진행 현황 집계
 - `sprint-complete`: Sprint 회고/완료 정리
 - `us-complete`: US 완료 요약 및 커밋 가이드
-- `adr`: Architecture Decision Record 생성/관리
-- `agent-skill-sync`: 다른 에이전트 스킬을 Gemini 형식으로 동기화
+- `record-adr`: Architecture Decision Record 생성/관리
+- `sync-agent-skills`: 다른 에이전트 스킬을 Gemini 형식으로 동기화
 
 ## 형식 규칙
 
@@ -23,4 +23,4 @@
 ## 동기화 메모
 
 - 공통 스킬 업데이트 시 `.claude/skills`, `.codex/skills`와 함께 동기화합니다.
-- 대량 동기화는 `agent-skill-sync` 스킬의 스크립트를 사용합니다.
+- 대량 동기화는 `sync-agent-skills` 스킬의 스크립트를 사용합니다.

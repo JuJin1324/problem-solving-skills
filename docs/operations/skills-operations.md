@@ -1,4 +1,4 @@
-# 메인 8개 스킬 운영 문서
+# 스킬 운영 문서
 
 이 문서는 스킬을 수정/추가하기 전에 기준점으로 삼는 운영 문서다.
 변경 제안은 이 문서 기준으로 브레인스토밍한 뒤 반영한다.
@@ -21,6 +21,8 @@ flowchart LR
 - `define-2w`: 사용자 입력에서 What/Why를 도출해 2W를 확정한다.
 - `design-phase`: 2W 기반으로 Phase/US/지표를 설계한다.
 - `plan-sprint`: 스프린트 계획/상태/회고 문서를 운영한다.
+- `record-adr`: 기술/아키텍처 의사결정을 ADR 문서로 기록하고 추적한다.
+- `sync-agent-skills`: 에이전트 간 스킬 디렉터리를 현재 에이전트 형식으로 동기화한다.
 - `design-implementation`: 구현 범위/다이어그램/인터페이스/ADR을 설계한다.
 - `execute-implementation`: 구현 코드를 작성하고 결과를 US 단위로 문서화한다.
 - `design-test`: 테스트 케이스와 우선순위를 설계한다.
@@ -46,16 +48,21 @@ flowchart LR
          ├─ sprint-status.md
          ├─ us-N.M-retrospective.md
          └─ sprint-retrospective.md
+docs/
+└─ adr/
+   ├─ ADR-001-title.md
+   └─ ADR-002-title.md
 ```
 
 참고:
 - `monitor-sprint`는 조회형 스킬이며 별도 산출물 파일을 생성하지 않는다.
+- `sync-agent-skills`는 프로젝트 산출물 대신 스킬 디렉터리(`.codex/skills`, `.claude/skills`, `.gemini/skills`)를 갱신한다.
 
 ## 변경 제안 체크리스트
 | 점검 항목 | 확인 | 메모 |
 |---|---|---|
 | 제안 목적이 `What/Why 우선` 원칙과 충돌하지 않는가? | [ ] |  |
-| 제안 스킬의 책임이 프로젝트 설계(`define-2w`, `design-phase`) 또는 스프린트 운영(`plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`) 중 어디인지 명확한가? | [ ] |  |
+| 제안 스킬의 책임이 프로젝트 설계(`define-2w`, `design-phase`), 스프린트 운영(`plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`), 의사결정 기록(`record-adr`), 운영 동기화(`sync-agent-skills`) 중 어디인지 명확한가? | [ ] |  |
 | 기존 스킬과 역할이 겹치지 않고 경계가 명확한가? | [ ] |  |
 | 입력/출력 산출물 경로가 `.agile/loops/loop-vN/` 규칙을 따르는가? | [ ] |  |
 | 산출물 파일명이 스킬명/역할과 일관되고 의미가 명확한가? | [ ] |  |

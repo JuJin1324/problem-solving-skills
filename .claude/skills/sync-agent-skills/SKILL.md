@@ -1,5 +1,5 @@
 ---
-name: agent-skill-sync
+name: sync-agent-skills
 description: "다른 에이전트(Codex/Gemini) 스킬을 현재 에이전트(Claude) 스킬 형식으로 동기화/변환할 때 사용하는 스킬."
 allowed-tools: Read,Write,Edit,Glob,Grep,Bash
 disable-model-invocation: false
@@ -24,7 +24,7 @@ user-invocable: true
 ## 실행
 
 ```bash
-bash .claude/skills/agent-skill-sync/scripts/sync_to_claude.sh \
+bash .claude/skills/sync-agent-skills/scripts/sync_to_claude.sh \
   ../problem-solving/.codex/skills \
   1h-agile-phase sprint-start 2w-brainstorm
 ```
@@ -35,4 +35,3 @@ bash .claude/skills/agent-skill-sync/scripts/sync_to_claude.sh \
 git status --short
 sed -n '1,20p' .claude/skills/<skill-name>/SKILL.md
 ```
-

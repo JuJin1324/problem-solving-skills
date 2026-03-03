@@ -1,9 +1,9 @@
 ---
-name: agent-skill-sync
+name: sync-agent-skills
 description: "다른 에이전트(Claude/Gemini) 스킬 디렉터리를 현재 에이전트(Codex) 형식으로 동기화/변환할 때 사용하는 스킬."
 ---
 
-# Agent Skill Sync
+# Sync Agent Skills
 
 ## 목적
 
@@ -38,7 +38,7 @@ find ../problem-solving/.claude/skills -maxdepth 2 -name SKILL.md
 ### Step 2: 스크립트로 동기화
 
 ```bash
-bash .codex/skills/agent-skill-sync/scripts/sync_to_codex.sh \
+bash .codex/skills/sync-agent-skills/scripts/sync_to_codex.sh \
   ../problem-solving/.claude/skills \
   1h-agile-phase sprint-start 2w-brainstorm
 ```

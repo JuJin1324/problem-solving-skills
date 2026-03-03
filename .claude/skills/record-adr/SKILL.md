@@ -1,6 +1,9 @@
 ---
-name: adr
-description: "Architecture Decision Record(ADR) 생성 스킬. 다음 두 가지 방식으로 동작한다: (1) 사용자가 /adr을 명시적으로 호출, (2) 대화 중 기술 선택/설계 변경/범위 결정이 내려지는 순간을 자동 감지하여 ADR 작성을 제안. docs/adr/ 디렉터리에 ADR-{N:03d}-{slug}.md 파일로 생성한다."
+name: record-adr
+description: "Architecture Decision Record(ADR) 생성 스킬. 다음 두 가지 방식으로 동작한다: (1) 사용자가 /record-adr을 명시적으로 호출, (2) 대화 중 기술 선택/설계 변경/범위 결정이 내려지는 순간을 자동 감지하여 ADR 작성을 제안. docs/adr/ 디렉터리에 ADR-{N:03d}-{slug}.md 파일로 생성한다."
+allowed-tools: Read,Write,Edit,Glob,Grep
+disable-model-invocation: false
+user-invocable: true
 ---
 
 # ADR 생성 스킬

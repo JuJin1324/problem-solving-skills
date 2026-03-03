@@ -1,5 +1,5 @@
 ---
-name: agent-skill-sync
+name: sync-agent-skills
 description: "다른 에이전트(Claude/Codex) 스킬을 현재 에이전트(Gemini) 스킬 형식으로 동기화/변환할 때 사용하는 스킬."
 ---
 
@@ -21,7 +21,7 @@ description: "다른 에이전트(Claude/Codex) 스킬을 현재 에이전트(Ge
 ## 실행
 
 ```bash
-bash .gemini/skills/agent-skill-sync/scripts/sync_to_gemini.sh \
+bash .gemini/skills/sync-agent-skills/scripts/sync_to_gemini.sh \
   ../problem-solving/.claude/skills \
   1h-agile-phase sprint-start 2w-brainstorm
 ```

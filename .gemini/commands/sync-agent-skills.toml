@@ -1,6 +1,6 @@
-description = "Run agent-skill-sync workflow"
+description = "Run sync-agent-skills workflow"
 prompt = """
-Follow the skill instructions in ".gemini/skills/agent-skill-sync/SKILL.md".
+Follow the skill instructions in ".gemini/skills/sync-agent-skills/SKILL.md".
 
 Execute the workflow in order and keep outputs concise.
 If required files are missing, create a minimal template and proceed.
