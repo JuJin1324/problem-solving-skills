@@ -27,7 +27,7 @@ description: "프로젝트 진행 단계에서 구현 설계를 수행하는 메
 
 ## 입력
 - `problems/[문제명]/1h-vN.md`
-- `.agile/sprints/sprint-N/plan.md` (있다면)
+- `.agile/sprints/sprint-N/plan.md`
 - `problems/[문제명]/tech-stack.md` (있다면 우선 사용)
 
 ## 출력물
