@@ -14,6 +14,7 @@
 - `monitor-sprint`: Sprint 진행 현황 집계
 - `record-adr`: Architecture Decision Record 생성/관리
 - `sync-agent-skills`: 다른 에이전트 스킬을 Codex 형식으로 동기화
+- `manage-experience`: 스킬별 경험 문서 seed/log/promote 운영
 
 ## Legacy Skills
 

@@ -32,6 +32,11 @@ description: "현재 Sprint의 진행 상황을 시각화하여 보여줍니다.
             └── sprint-plan.md        # Sprint 계획 (진행 상황 포함)
 ```
 
+## 참고 문서
+
+- `references/experience.md`
+  - 진행률/일정 상태 해석과 blocker 관리에서 유효했던 패턴을 참고할 때
+
 ---
 
 ## 작동 방식

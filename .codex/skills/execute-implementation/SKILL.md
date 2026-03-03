@@ -37,6 +37,8 @@ description: "구현 설계를 바탕으로 실제 코드를 작성하고 검증
 - `references/code-style-conventions.md`
 - `references/ddd-java.md` (Java 구현 시)
 - `references/ddd-kotlin.md` (Kotlin 구현 시)
+- `references/experience.md`
+  - 코드-요구사항 매핑, 테스트 순서, 컨벤션 점검에서 재사용 패턴을 참고할 때
 
 ## 작동 방식
 

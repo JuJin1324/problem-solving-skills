@@ -41,6 +41,8 @@ description: "프로젝트 진행 단계에서 구현 설계를 수행하는 메
 참고 문서:
 - `references/philosophy.md`
 - `references/diagram-guidelines.md`
+- `references/experience.md`
+  - 스택 선택, 다이어그램 게이트, 인터페이스 정리에서 유효했던 패턴을 참고할 때
 
 ## 작동 방식
 

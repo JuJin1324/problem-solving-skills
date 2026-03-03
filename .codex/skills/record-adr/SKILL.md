@@ -5,6 +5,11 @@ description: "Architecture Decision Record(ADR) 생성 스킬. 다음 두 가지
 
 # ADR 생성 스킬
 
+## 참고 문서
+
+- `references/experience.md`
+  - 어떤 결정에서 ADR을 남겨야 효과적이었는지, 상태 갱신 패턴이 어땠는지 참고할 때
+
 ## 자동 감지 (Auto-detection)
 
 대화 중 아래 신호가 감지되면 즉시 개입하여 ADR 작성을 제안한다.

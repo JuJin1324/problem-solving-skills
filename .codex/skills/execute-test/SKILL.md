@@ -32,6 +32,8 @@ description: "테스트 설계를 바탕으로 테스트 코드를 구현하고 
 
 참고 문서:
 - `references/philosophy.md`
+- `references/experience.md`
+  - P0 우선 실행, 실패 재현 기록, 결함 환류 패턴을 참고할 때
 
 ## 작동 방식
 
