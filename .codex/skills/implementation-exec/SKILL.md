@@ -35,6 +35,8 @@ description: "구현 설계를 바탕으로 실제 코드를 작성하고 검증
 참고 문서:
 - `references/philosophy.md`
 - `references/code-style-conventions.md`
+- `references/ddd-java.md` (Java 구현 시)
+- `references/ddd-kotlin.md` (Kotlin 구현 시)
 
 ## 작동 방식
 
@@ -46,6 +48,7 @@ description: "구현 설계를 바탕으로 실제 코드를 작성하고 검증
 ### 2단계. 구현 계획 작성
 - 변경 파일 목록 예측
 - 테스트 방법(단위/통합) 확정
+- 언어가 Java면 `references/ddd-java.md`, Kotlin이면 `references/ddd-kotlin.md`를 참조
 
 ### 3단계. 코드 구현
 - 작은 단위로 구현
