@@ -46,7 +46,7 @@ Q: "Sprint N을 완료하시겠습니까? (y/n)"
 
 **아니오인 경우:**
 - Sprint 계속 진행 안내
-- `/sprint-status`로 현황 확인 권장
+- `/monitor-sprint`로 현황 확인 권장
 
 ### Step 2: US 회고 수집
 

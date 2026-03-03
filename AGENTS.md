@@ -8,10 +8,14 @@
 3. 실행은 Sprint 단위로 관리한다.
 
 ## 권장 흐름
-1. `2w-brainstorm`: 문제 정의와 목적 정렬
-2. `1h-agile-phase`: 범위/단계/지표 설계
-3. `sprint-start`: 실행 계획 생성
-4. `sprint-status`, `sprint-complete`, `us-complete`: 진행/완료 기록
+1. `define-2w`: 사용자 입력에서 What/Why를 역추출해 방향 확정
+2. `design-phase-us`: Phase+US/범위/지표 설계
+3. `plan-sprint`: Sprint 계획(US/Step) 확정
+4. `design-implementation`: 구현 설계 산출물 작성
+5. `execute-implementation`: 코드 구현/검증/문서화
+6. `design-test`: 테스트 설계
+7. `execute-test`: 테스트 구현/실행/분석
+8. `monitor-sprint`: 진행 상황 점검
 
 ## Codex Skill Location
 - Codex 스킬 경로: `.codex/skills/<skill-name>/SKILL.md`

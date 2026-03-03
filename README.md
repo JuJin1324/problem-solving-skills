@@ -4,18 +4,15 @@
 
 핵심 목적은 `How`부터 시작해서 방향을 잃는 문제를 줄이는 것입니다. 먼저 `What/Why`를 명확히 정리하고, 그 다음 `How`를 설계하면 목표가 흔들리지 않고 범위 이탈을 줄일 수 있습니다.
 
-## 문제 해결 접근 방식
-1. `What/Why` 정리 (`2w-brainstorm`)
-- 무엇을 해결하는지, 왜 지금 해야 하는지 먼저 정의
-- 모호한 요구를 명확한 문제로 전환
-
-2. `How` 구조화 (`1h-agile-phase`)
-- Mermaid 다이어그램으로 범위 시각화
-- Phase 단위로 실행 순서와 기준 정의
-
-3. 애자일 Sprint 실행 (`sprint-start`)
-- 설계된 Phase를 실제 Sprint로 변환
-- `sprint-status`, `sprint-complete`, `us-complete`로 진행/완료 관리
+## 문제 해결 접근 방식 (Codex 권장)
+1. `define-2w`: 사용자 입력(주로 How)에서 What/Why를 역추출해 2W를 정의
+2. `design-phase-us`: 2W를 기반으로 Phase+US/범위/지표 설계
+3. `plan-sprint`: 이번 Sprint의 US/Step 계획 확정
+4. `design-implementation`: 구현 설계(Sequence/Flowchart, C4 Container 선택)
+5. `execute-implementation`: 코드 구현 + 검증 + 실행 문서화
+6. `design-test`: 테스트 설계(정상/실패/엣지, 우선순위)
+7. `execute-test`: 테스트 구현/실행/실패 분석
+8. `monitor-sprint`: Sprint 진행 상태 시각화/점검
 
 ## 디렉터리 구조
 - `.claude/skills/`: Claude Code 스킬 (`<skill>/SKILL.md`)
@@ -26,12 +23,8 @@
 - `scripts/sync-skills.sh`: 기존 작업공간 스킬 동기화 스크립트
 
 ## 포함 스킬
-- `2w-brainstorm`: What/Why 중심 문제 정의
-- `1h-agile-phase`: 범위 다이어그램 + Phase 구조화
-- `sprint-start`: Phase 기반 Sprint 시작
-- `sprint-status`: Sprint 진행 상태 점검
-- `sprint-complete`: Sprint 완료 및 회고 정리
-- `us-complete`: User Story 완료 요약
+- 메인 워크플로우: `define-2w`, `design-phase-us`, `plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`
+- 보조/호환: `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`, `adr`, `agent-skill-sync`
 
 ## 도구별 사용
 - Claude Code: `.claude/skills`의 스킬 이름으로 호출

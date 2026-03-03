@@ -270,7 +270,7 @@ Sprint N
 3. 진행 중인 태스크: "Status: In Progress" 추가
 
 다음 명령어:
-- /sprint-status : 진행 상황 확인
+- /monitor-sprint : 진행 상황 확인
 - /sprint-complete : Sprint 완료 및 회고
 ```
 
@@ -332,7 +332,7 @@ ADR은 **아키텍처 고민이 발생한 시점에 자연스럽게 작성**:
 Sprint 시작 후 사용자가 할 일:
 
 1. **plan.md 파일 직접 수정** - 진행하면서 체크리스트 업데이트
-2. **`/sprint-status`** - 진행 상황 확인
+2. **`/monitor-sprint`** - 진행 상황 확인
 3. **`/sprint-complete`** - Sprint 완료 및 회고 작성
 
 ---
