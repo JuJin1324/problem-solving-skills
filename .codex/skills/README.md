@@ -12,6 +12,9 @@
 - `us-complete`: US 완료 요약 및 커밋 가이드
 - `adr`: Architecture Decision Record 생성/관리
 - `agent-skill-sync`: 다른 에이전트 스킬을 Codex 형식으로 동기화
+- `agile-loop-2w`: 4개 필수 질문으로 2W를 라운드(vN) 단위로 빠르게 정의
+- `agile-loop-1h`: 2W vN 기반으로 1스프린트 분량 How(다이어그램/Phase/지표) 설계
+- `agile-loop-sprint`: Sprint 계획/진행/완료/US 완료를 통합 운영하고 다음 2W/1H 라운드로 반영
 
 ## 형식 규칙
 
