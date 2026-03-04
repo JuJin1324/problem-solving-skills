@@ -17,9 +17,16 @@ flowchart LR
   H --> A
 ```
 
+## 워크플로우 핵심 관점
+- 전체 스킬 워크플로우의 시작점은 `정확한 문제 정의(2W)`다.
+- 문제 정의가 확정되면 `design-phase`에서 이번 루프의 `MVP` 해결 범위를 명확화한다.
+- 이후 확정된 MVP 범위 안에서 실행/검증한다.
+- 루프 종료 시 학습 결과를 반영해 다음 루프에서 범위를 확장하거나 문제 정의를 보정한다.
+- 운영의 기본 사이클은 `문제 정의 -> MVP 범위 해결 -> 다음 루프 확장`의 반복이다.
+
 ## 스킬별 1줄 설명
-- `define-2w`: 사용자 입력에서 What/Why를 도출해 2W를 확정한다.
-- `design-phase`: 2W 기반으로 Phase/US/지표를 설계한다.
+- `define-2w`: 사용자 입력에서 What/Why를 도출해 문제 정의(2W)를 확정한다.
+- `design-phase`: 2W 기반으로 MVP 범위(In/Out/Unknown)와 Phase/US/지표를 설계한다.
 - `plan-sprint`: 스프린트 계획/상태/회고 문서를 운영한다.
 - `design-implementation`: 구현 범위/다이어그램/인터페이스/ADR을 설계한다.
 - `execute-implementation`: 구현 코드를 작성하고 결과를 US 단위로 문서화한다.
