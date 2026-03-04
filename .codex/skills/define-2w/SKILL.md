@@ -50,20 +50,32 @@ description: "2W(무엇/왜)를 통해 문제를 명확히 정의하고, 최소 
 - `references/philosophy.md` 핵심 원칙 확인
 - `.agile/loops/loop-vN/` 디렉터리 확인/생성
 - 직전 루프의 `04-design-phase.md` 존재 여부 확인
+- 직전 루프의 sprint 진행 문서(`sprint/02-sprint-status.md`, `sprint/04-sprint-retrospective.md`) 존재 여부 확인
 
 확인 경로(예):
 - `.agile/loops/loop-vN-1/04-design-phase.md`
 - 또는 가장 최신 루프의 `04-design-phase.md`
+- `.agile/loops/loop-vN-1/sprint/02-sprint-status.md`
+- `.agile/loops/loop-vN-1/sprint/04-sprint-retrospective.md`
 
 ### 2단계. Phase 연속성 게이트
-직전 `04-design-phase.md`가 있으면 다음을 먼저 판단한다.
+직전 `04-design-phase.md`가 있으면 **사용자 선택을 받기 전에** 다음을 먼저 브리핑한다.
 
 - 감지 대상:
   - 다음 후보 Phase(보통 `Phase-2`, `Phase-3`)
   - 해당 Phase의 목표/US
+- 진행상황 요약:
+  - 직전 Phase의 완료/진행/대기 상태(가능하면 sprint 문서 근거 포함)
 - AI 추천:
   - `연속 진행 권장`: 다음 Phase가 유효하고 현재 목표가 이어질 때
   - `새로 시작 권장`: 방향/문제 자체가 바뀌었을 때
+
+고정 브리핑 스크립트(선택 전, 4줄):
+1. `[진행상황 브리핑] 직전 루프 기준 완료={done_summary}, 진행중={in_progress_summary}, 대기={todo_summary}다.`
+2. `[다음 Phase 브리핑] 다음 후보 Phase는 {phase_name}이며 목표/US는 {goal_us}다. 범위는 In={in_items}, Out={out_items}, Unknown={unknown_items}다.`
+3. `[AI 추천] {recommendation}. 근거: {reason}.`
+4. `[선택 요청] \`연속 진행\` 또는 \`새로 시작\` 중 하나를 선택해달라.`
+
 - 사용자 선택:
   - `연속 진행` | `새로 시작`
 
@@ -73,7 +85,7 @@ description: "2W(무엇/왜)를 통해 문제를 명확히 정의하고, 최소 
 - `이전 04-design-phase 없음`: 신규 2W로 진행
 
 ### 3단계. 단일 입력 수집
-직전 `04-design-phase.md`가 있으면, 입력 수집 전에 아래를 먼저 사용자에게 짧게 브리핑한다.
+2단계에서 사용자 선택이 확정되면, 입력 수집 전에 아래를 먼저 사용자에게 짧게 브리핑한다.
 - Phase 정보 요약: 다음 후보 Phase 목표/US, 핵심 In/Out/Unknown
 - AI 의견: 지금 관점에서 유지할 점 1~2개 + 바꿔야 할 점 1~2개
 - 브리핑 목적: 사용자가 현재 맥락을 공유받은 상태에서 입력하도록 돕기
@@ -133,6 +145,7 @@ description: "2W(무엇/왜)를 통해 문제를 명확히 정의하고, 최소 
 ### 7단계. 2W vN 문서화
 `templates/define-2w-vN.md`로 `.agile/loops/loop-vN/01-define-2w.md`를 작성한다.
 - Phase 연속성 게이트 결과(AI 추천 + 사용자 선택 + 적용 Phase) 기록
+- 선택 전 고정 브리핑 기록(진행상황 + 다음 Phase + 추천 + 선택 요청)
 - 이전 phase 문서가 있으면 사전 브리핑 기록(요약 + AI 의견 + 사용자 반응)
 - 사용자 자유 입력 원문
 - 문제 정의 1문장(What+Why 통합)
@@ -155,6 +168,8 @@ description: "2W(무엇/왜)를 통해 문제를 명확히 정의하고, 최소 
 - 사용자에게 What/Why를 직접 정답처럼 요구함
 - 질문지를 별도 파일로 강제해 입력 마찰을 키움
 - 질문지를 길게 늘려 답변 피로를 유발함
+- 사용자에게 phase 문서를 직접 확인하라고 넘김
+- 선택 전 브리핑 없이 `연속 진행 | 새로 시작` 선택부터 요구함
 - 이전 phase 문서가 있는데 브리핑 없이 바로 자유 입력을 요청함
 - 고정 브리핑 스크립트를 쓰지 않아 맥락 전달 품질이 매번 달라짐
 - 사례를 장문 리서치로 확장함
@@ -162,6 +177,7 @@ description: "2W(무엇/왜)를 통해 문제를 명확히 정의하고, 최소 
 
 ## 완료 조건
 - Phase 연속성 게이트 기록 완료 (이전 phase 존재 시 필수)
+- 이전 phase 문서 존재 시 선택 전 고정 브리핑(진행상황/다음 Phase/추천/선택 요청) 전달 완료
 - 이전 phase 문서 존재 시 사전 브리핑 전달/기록 완료
 - 단일 자유 입력 수집 완료
 - What 1문장, Why 1문장 도출 완료
