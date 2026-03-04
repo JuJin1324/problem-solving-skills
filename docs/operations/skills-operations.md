@@ -1,92 +1,105 @@
-# 스킬 운영 문서
+# 파이프라인 계약
 
-이 문서는 스킬을 수정/추가하기 전에 기준점으로 삼는 운영 문서다.
-변경 제안은 이 문서 기준으로 브레인스토밍한 뒤 반영한다.
-레거시 스킬 매핑/전환 기준은 `docs/operations/skills-lifecycle.md`를 참고한다.
+이 문서는 `loop-vN` 기준 문제 해결 파이프라인의 고수준 운영 계약을 정의한다.
+이 문서는 특정 스킬에 의존하지 않으며, 어떤 실행 주체든 동일하게 적용된다.
 
-## 운영 흐름
+## 문제 해결 파이프라인 그래프
 ```mermaid
 flowchart LR
-  A[define-2w] --> B[design-phase]
-  B --> C[monitor-sprint]
-  C --> D[design-implementation]
-  D --> E[execute-implementation]
-  E --> F[design-test]
-  F --> G[execute-test]
-  G --> C
-  C --> A
+  C1[1. 방향 Direction]
+  C2[2. 제어 Control]
+  C3[3. 실행 Delivery]
+  C4[4. 학습 Learning]
+
+  C1 --> C2
+  C2 --> C3
+  C3 --> C2
+  C2 --> C4
+  C4 --> C1
 ```
 
-## 워크플로우 핵심 관점
-- 전체 스킬 워크플로우의 시작점은 `정확한 문제 정의(2W)`다.
-- 문제 정의가 확정되면 `design-phase`에서 이번 루프의 `MVP` 해결 범위를 명확화한다.
-- 이후 확정된 MVP 범위 안에서 실행/검증한다.
-- 루프 종료 시 학습 결과를 반영해 다음 루프에서 범위를 확장하거나 문제 정의를 보정한다.
-- 운영의 기본 사이클은 `문제 정의 -> MVP 범위 해결 -> 다음 루프 확장`의 반복이다.
+## 루프 기반 운영 원칙
+1. 모든 실행은 최신 `loop-vN`을 기준으로 한다.
+2. 단계 전환은 실행 주체가 아니라 디렉터리 상태(존재/비어있음/갱신 시각)로 판단한다.
+3. 각 단계는 전용 산출 디렉터리를 소유한다.
+4. 파일명은 실행 주체 자율이지만, 산출물은 반드시 해당 단계 디렉터리에 저장한다.
+5. 실행 주체가 달라도 입력/출력 계약은 동일하다.
 
-## 스킬별 1줄 설명
-- `define-2w`: 사용자 입력에서 What/Why를 도출해 문제 정의(2W)를 확정한다.
-- `design-phase`: 2W 기반으로 MVP 범위(In/Out/Unknown)와 Phase/US/지표를 설계한다.
-- `monitor-sprint`: 스프린트 상태 문서를 bootstrap/갱신하고 진행률/리스크/다음 스킬 라우팅을 제공한다.
-- `design-implementation`: 구현 범위/다이어그램/인터페이스/ADR을 설계한다.
-- `execute-implementation`: 구현 코드를 작성하고 결과를 US 단위로 문서화한다.
-- `design-test`: 테스트 케이스와 우선순위를 설계한다.
-- `execute-test`: 테스트를 실행하고 실패 분석/재검증을 기록한다.
-- `record-adr`: 기술/아키텍처 의사결정을 ADR 문서로 기록하고 추적한다.
-- `sync-agent-skills`: 에이전트 간 스킬 디렉터리를 현재 에이전트 형식으로 동기화한다.
-- `manage-experience`: 스킬별 경험 문서를 초기화하고 실전 패턴을 누적/정제한다.
-- `migrate-legacy-artifacts`: 구버전 산출물을 프로젝트 공통 자동 탐색으로 신버전 산출물 경로에 안전하게 마이그레이션한다.
+## 파이프라인 단계 카탈로그
+| 단계 ID | 파이프라인 단계 | 목적 | 단계 산출 디렉터리 | 이전 단계 필수 디렉터리 |
+|---|---|---|---|---|
+| `C1` | `Direction` | 문제 정의와 범위를 확정한다. | `.agile/loops/loop-vN/1-direction/` | 없음 |
+| `C2` | `Control` | 상태/리스크를 관리하고 다음 단계를 결정한다. | `.agile/loops/loop-vN/2-control/` | `.agile/loops/loop-vN/1-direction/` |
+| `C3` | `Delivery` | 설계/구현/검증을 수행한다. | `.agile/loops/loop-vN/3-delivery/` | `.agile/loops/loop-vN/2-control/` |
+| `C4` | `Learning` | 회고와 다음 루프 전략을 확정한다. | `.agile/loops/loop-vN/4-learning/` | `.agile/loops/loop-vN/3-delivery/` |
 
-## 산출물 저장 경로 (통합 트리)
+## 단계 전환 규칙
+1. `C1 -> C2`: `1-direction/` 디렉터리가 존재하고 비어있지 않으면 전환한다.
+2. `C2 -> C3`: `2-control/` 디렉터리가 존재하고 비어있지 않으면 전환한다.
+3. `C3 -> C2`: `3-delivery/` 갱신 후 재평가가 필요하면 전환한다.
+4. `C2 -> C4`: 제어 단계 산출물에서 학습 단계 진입 결정이 확인되면 전환한다.
+5. `C4 -> C1`: `4-learning/` 산출물에서 다음 루프 시작 결정이 확인되면 전환한다.
+
+## 산출물 관리 모델 (권장)
+| 파이프라인 단계 | 산출 디렉터리 | 디렉터리 책임 | 최소 보장 조건 |
+|---|---|---|---|
+| `C1 Direction` | `1-direction/` | 문제 정의/범위 확정 관련 산출물 저장 | 디렉터리 존재 + 파일 1개 이상 |
+| `C2 Control` | `2-control/` | 상태/리스크/라우팅 판단 관련 산출물 저장 | 디렉터리 존재 + 파일 1개 이상 |
+| `C3 Delivery` | `3-delivery/` | 설계/구현/검증 실행 관련 산출물 저장 | 디렉터리 존재 + 파일 1개 이상 |
+| `C4 Learning` | `4-learning/` | 회고/학습/다음 루프 전략 산출물 저장 | 디렉터리 존재 + 파일 1개 이상 |
+
+운영 원칙:
+1. 파일명 규칙은 강제하지 않는다.
+2. 라우팅 판단은 단계 디렉터리 상태와 제어 단계 산출물의 결정 기록을 기준으로 한다.
+3. 산출물은 반드시 현재 루프(`loop-vN`) 내부 디렉터리에 저장한다.
+
+## 단계 실행 프로토콜
+1. 최신 `loop-vN`을 식별한다.
+2. 현재 단계와 이전 단계 디렉터리 상태를 점검한다.
+3. 현재 단계 산출 디렉터리에 산출물을 생성/갱신한다.
+4. 전환 조건 충족 여부를 확인하고 다음 단계로 이동한다.
+
+## 게이트 체크리스트
+1. 대상 루프가 최신 `loop-vN`인지 확인한다.
+2. 이전 단계 필수 디렉터리가 존재하고 비어있지 않은지 확인한다.
+3. 현재 단계 산출물이 올바른 단계 디렉터리에 저장되었는지 확인한다.
+4. 다른 루프 경로에 산출물이 섞이지 않았는지 확인한다.
+5. 전환 조건 충족 후에만 다음 단계로 라우팅한다.
+
+## 라우팅 규칙
+1. `1-direction/`이 없거나 비어있으면 `C1(Direction)`으로 라우팅한다.
+2. `2-control/`이 없거나 비어있으면 `C2(Control)`로 라우팅한다.
+3. `3-delivery/`가 없거나 실행 진행 중이면 `C3(Delivery)`로 라우팅한다.
+4. 실행 후 재평가가 필요하면 `C2(Control)`로 라우팅한다.
+5. `4-learning/`이 없고 학습 조건이 충족되면 `C4(Learning)`으로 라우팅한다.
+6. 학습 단계 종료 후 다음 루프 시작점으로 `C1(Direction)`에 재진입한다.
+
+## 장애 및 복구
+| 장애/불일치 | 감지 위치 | 복구 규칙 | 재진입 단계 |
+|---|---|---|---|
+| 필수 입력 디렉터리 누락 | 모든 단계 게이트 | 누락 디렉터리를 채우는 직전 단계로 회귀 | 직전 단계 |
+| 단계 디렉터리 비어 있음 | 모든 단계 게이트 | 해당 단계 산출물 최소 1개 생성 후 재평가 | 해당 단계 |
+| `loop-vN` 경로 불일치 | 모든 단계 | 최신 루프 기준으로 산출물 재배치 후 경로 정리 | `C2(Control)` |
+| 잘못된 단계 디렉터리에 산출물 저장 | 모든 단계 | 올바른 단계 디렉터리로 이동/재기록 | 해당 단계 |
+
+## 준수 규칙
+1. 모든 실행 주체는 본 문서의 디렉터리 계약을 준수한다.
+2. 실행 주체는 특정 스킬명 의존 없이 입력/출력 계약을 충족해야 한다.
+3. 단계 전환 판단은 파일명/구현체가 아니라 디렉터리 상태 기준으로 수행한다.
+4. `다음 단계` 결정은 `라우팅 규칙`과 충돌하면 안 된다.
+
+## 산출물 저장 경로
 ```text
 .agile/
-├─ context/
-│  └─ tech-stack.md
-├─ migration/
-│  └─ legacy-migration-report-vN.md
 └─ loops/
    └─ loop-vN/
-      ├─ 01-01-define-2w-phase-briefing.md
-      ├─ 01-02-define-2w.md
-      ├─ 01-03-define-2w-case-study.md
-      ├─ 01-04-define-2w-patterns.md
-      ├─ 02-design-phase.md
-      ├─ 03-design-implementation.md
-      ├─ 04-execute-implementation-us-N.M.md
-      ├─ 05-design-test-us-N.M.md
-      ├─ 06-execute-test-us-N.M.md
-      └─ sprint/
-         ├─ 02-sprint-status.md
-         ├─ 03-us-N.M-retrospective.md
-         └─ 04-sprint-retrospective.md
-docs/
-└─ adr/
-   ├─ ADR-001-title.md
-   └─ ADR-002-title.md
-.codex/
-└─ skills/
-   └─ <skill-name>/
-      └─ references/
-         └─ experience.md
+      ├─ 1-direction/
+      ├─ 2-control/
+      ├─ 3-delivery/
+      └─ 4-learning/
 ```
 
-참고:
-- `monitor-sprint`는 `02-sprint-status.md`를 단일 소스로 관리하며, 없으면 bootstrap으로 생성한다.
-- `monitor-sprint`는 US/Sprint 완료 시 회고 파일(`03-us-N.M-retrospective.md`, `04-sprint-retrospective.md`)을 생성한다.
-- `sync-agent-skills`는 프로젝트 산출물 대신 스킬 디렉터리(`.codex/skills`, `.claude/skills`, `.gemini/skills`)를 갱신한다.
-- `manage-experience`는 프로젝트 산출물 대신 각 스킬의 `references/experience.md`를 생성/갱신한다.
-- `migrate-legacy-artifacts`는 레거시 문서를 신버전 경로로 복사/매핑하고 리포트를 `.agile/migration/`에 남긴다.
-
-## 변경 제안 체크리스트
-| 점검 항목 | 확인 | 메모 |
-|---|---|---|
-| 제안 목적이 `What/Why 우선` 원칙과 충돌하지 않는가? | [ ] |  |
-| 제안 스킬의 책임이 프로젝트 설계(`define-2w`, `design-phase`), 스프린트 운영(`monitor-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`), 의사결정 기록(`record-adr`), 운영 동기화(`sync-agent-skills`), 경험 자산 관리(`manage-experience`), 레거시 마이그레이션(`migrate-legacy-artifacts`) 중 어디인지 명확한가? | [ ] |  |
-| 기존 스킬과 역할이 겹치지 않고 경계가 명확한가? | [ ] |  |
-| 입력/출력 산출물 경로가 `.agile/loops/loop-vN/` 규칙을 따르는가? | [ ] |  |
-| 산출물 파일명이 스킬명/역할과 일관되고 의미가 명확한가? | [ ] |  |
-| 사용자 확인 게이트가 필요한 단계인지, 필요 시 질문이 최소화되어 있는가? | [ ] |  |
-| 사례 연구/웹 검색이 필요한 경우 실행 조건과 최대 범위(비용/토큰)가 정의되어 있는가? | [ ] |  |
-| 문서 템플릿 변경 시 관련 스킬 `SKILL.md`와 참조 문서 경로가 함께 갱신되는가? | [ ] |  |
-| 기존 프로젝트와의 호환(레거시 파일명/경로 처리)이 필요한지 검토했는가? | [ ] |  |
-| 변경 후 운영 흐름(2W -> Phase -> Monitor/Execution 루프)이 끊기지 않는가? | [ ] |  |
+## 변경 이력
+- `v1.5.1` (2026-03-04): 단계 산출 경로에서 `details/` 중간 디렉터리를 제거하고 `loop-vN` 바로 아래 단계 디렉터리 구조로 단순화함.
+- `v1.5.0` (2026-03-04): 단계별 `.md` 산출 문서 개념을 제거하고, `details/1-direction~4-learning` 디렉터리 기반 계약으로 전환함.
+- `v1.4.3` (2026-03-04): 상세 산출물 묶음과 저장 경로 표기를 `1-direction/2-control/3-delivery/4-learning` 형식으로 통일함.
