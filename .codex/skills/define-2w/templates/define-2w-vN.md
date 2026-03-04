@@ -8,7 +8,7 @@
 - 미확정/리스크:
 
 ## Phase 연속성 게이트
-- 이전 design-phase 경로:
+- 이전 04-design-phase 경로:
 - 감지된 다음 Phase:
 - AI 추천: 연속 진행 권장 | 새로 시작 권장
 - 사용자 선택: 연속 진행 | 새로 시작
@@ -50,7 +50,7 @@
 - 사용자 선택: 진행 | 생략
 
 ## 사례 연구 결과 연결 (실행 시)
-- 결과 파일: `.agile/loops/loop-vN/define-2w-case-study.md`
+- 결과 파일: `.agile/loops/loop-vN/02-define-2w-case-study.md`
 - 2W 반영 요약(최대 3줄):
 
 ## 안티패턴/베스트 프랙티스 연구 판단 게이트
@@ -59,7 +59,7 @@
 - 사용자 선택: 진행 | 생략
 
 ## 안티패턴/베스트 프랙티스 연구 결과 연결 (실행 시)
-- 결과 파일: `.agile/loops/loop-vN/define-2w-patterns.md`
+- 결과 파일: `.agile/loops/loop-vN/03-define-2w-patterns.md`
 - 2W 반영 요약(최대 3줄):
 
 ## 결정

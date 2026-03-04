@@ -37,19 +37,19 @@ flowchart LR
 │  └─ tech-stack.md
 └─ loops/
    └─ loop-vN/
-      ├─ define-2w.md
-      ├─ define-2w-case-study.md
-      ├─ define-2w-patterns.md
-      ├─ design-phase.md
-      ├─ design-implementation.md
-      ├─ execute-implementation-us-N.M.md
-      ├─ design-test-us-N.M.md
-      ├─ execute-test-us-N.M.md
+      ├─ 01-define-2w.md
+      ├─ 02-define-2w-case-study.md
+      ├─ 03-define-2w-patterns.md
+      ├─ 04-design-phase.md
+      ├─ 05-design-implementation.md
+      ├─ 06-execute-implementation-us-N.M.md
+      ├─ 07-design-test-us-N.M.md
+      ├─ 08-execute-test-us-N.M.md
       └─ sprint/
-         ├─ sprint-plan.md
-         ├─ sprint-status.md
-         ├─ us-N.M-retrospective.md
-         └─ sprint-retrospective.md
+         ├─ 01-sprint-plan.md
+         ├─ 02-sprint-status.md
+         ├─ 03-us-N.M-retrospective.md
+         └─ 04-sprint-retrospective.md
 docs/
 └─ adr/
    ├─ ADR-001-title.md

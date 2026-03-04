@@ -173,7 +173,7 @@ for skill in "${SKILLS[@]}"; do
       e2_condition="복수 작업자가 동시에 plan 파일을 수정할 때"
       e3_situation="Blocker를 별도 채널에만 기록해 현황 문서와 분리된 상황"
       e3_signal="회의 시 blocker 최신 상태를 찾는 시간이 길어짐"
-      e3_choice="sprint-plan.md의 Blockers 섹션을 단일 소스로 사용"
+      e3_choice="01-sprint-plan.md의 Blockers 섹션을 단일 소스로 사용"
       e3_result="모니터링 결과와 대응 논의가 즉시 연결됨"
       e3_condition="외부 의존 이슈가 잦은 스프린트"
       ;;
