@@ -10,12 +10,12 @@
 ## 권장 흐름
 1. `define-2w`: 사용자 입력에서 What/Why를 역추출해 방향 확정
 2. `design-phase`: Phase+US/범위/지표 설계
-3. `plan-sprint`: Sprint 계획(US/Step) 확정
+3. `monitor-sprint`: Sprint 상태 문서 초기화/대시보드 점검
 4. `design-implementation`: 구현 설계 산출물 작성
 5. `execute-implementation`: 코드 구현/검증/문서화
 6. `design-test`: 테스트 설계
 7. `execute-test`: 테스트 구현/실행/분석
-8. `monitor-sprint`: 진행 상황 점검
+8. `monitor-sprint`: 진행 상황 갱신/회고 및 다음 루프 판단
 
 ## Codex Skill Location
 - Codex 스킬 경로: `.codex/skills/<skill-name>/SKILL.md`
