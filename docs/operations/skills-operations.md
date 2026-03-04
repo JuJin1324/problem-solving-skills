@@ -39,6 +39,7 @@ flowchart LR
    └─ loop-vN/
       ├─ define-2w.md
       ├─ define-2w-case-study.md
+      ├─ define-2w-patterns.md
       ├─ design-phase.md
       ├─ design-implementation.md
       ├─ execute-implementation-us-N.M.md
