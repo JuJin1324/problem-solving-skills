@@ -29,12 +29,15 @@ flowchart LR
 - `record-adr`: 기술/아키텍처 의사결정을 ADR 문서로 기록하고 추적한다.
 - `sync-agent-skills`: 에이전트 간 스킬 디렉터리를 현재 에이전트 형식으로 동기화한다.
 - `manage-experience`: 스킬별 경험 문서를 초기화하고 실전 패턴을 누적/정제한다.
+- `migrate-legacy-artifacts`: 구버전 산출물을 신버전 산출물 경로로 안전하게 마이그레이션한다.
 
 ## 산출물 저장 경로 (통합 트리)
 ```text
 .agile/
 ├─ context/
 │  └─ tech-stack.md
+├─ migration/
+│  └─ legacy-migration-report-vN.md
 └─ loops/
    └─ loop-vN/
       ├─ 01-define-2w.md
@@ -65,12 +68,13 @@ docs/
 - `monitor-sprint`는 조회형 스킬이며 별도 산출물 파일을 생성하지 않는다.
 - `sync-agent-skills`는 프로젝트 산출물 대신 스킬 디렉터리(`.codex/skills`, `.claude/skills`, `.gemini/skills`)를 갱신한다.
 - `manage-experience`는 프로젝트 산출물 대신 각 스킬의 `references/experience.md`를 생성/갱신한다.
+- `migrate-legacy-artifacts`는 레거시 문서를 신버전 경로로 복사/매핑하고 리포트를 `.agile/migration/`에 남긴다.
 
 ## 변경 제안 체크리스트
 | 점검 항목 | 확인 | 메모 |
 |---|---|---|
 | 제안 목적이 `What/Why 우선` 원칙과 충돌하지 않는가? | [ ] |  |
-| 제안 스킬의 책임이 프로젝트 설계(`define-2w`, `design-phase`), 스프린트 운영(`plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`), 의사결정 기록(`record-adr`), 운영 동기화(`sync-agent-skills`), 경험 자산 관리(`manage-experience`) 중 어디인지 명확한가? | [ ] |  |
+| 제안 스킬의 책임이 프로젝트 설계(`define-2w`, `design-phase`), 스프린트 운영(`plan-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `monitor-sprint`), 의사결정 기록(`record-adr`), 운영 동기화(`sync-agent-skills`), 경험 자산 관리(`manage-experience`), 레거시 마이그레이션(`migrate-legacy-artifacts`) 중 어디인지 명확한가? | [ ] |  |
 | 기존 스킬과 역할이 겹치지 않고 경계가 명확한가? | [ ] |  |
 | 입력/출력 산출물 경로가 `.agile/loops/loop-vN/` 규칙을 따르는가? | [ ] |  |
 | 산출물 파일명이 스킬명/역할과 일관되고 의미가 명확한가? | [ ] |  |
