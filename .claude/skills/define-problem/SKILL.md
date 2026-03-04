@@ -24,14 +24,15 @@ user-invocable: true
 ## 전체 흐름
 
 ```
-/define-problem → 문제 명확화 → problem.md
+/define-problem → problem.md
        ↓
-/solve-problem → 단계별 해결 → solution.md (배운 점 포함)
+/solve-problem → 방법론 선택 → [플러그인] → 해결 → solution.md
        ↓
    (미해결?) → /define-problem (재정의) → /solve-problem → ...
 ```
 
-이것이 가장 단순한 **문제 해결 루프**다. 한 바퀴 돌 때마다 문제 이해가 깊어진다.
+이것이 **문제 해결 루프**다. 한 바퀴 돌 때마다 문제 이해가 깊어진다.
+`/solve-problem`에서 문제 복잡도에 맞는 방법론(직행/설계/스프린트/풀 엔지니어링)을 선택한다.
 
 ---
 
@@ -121,7 +122,8 @@ How를 부정하는 게 아니다. 그 방법이 해결하려는 **문제(What/W
 - Why: [왜]
 - Done: [완료 기준]
 
-🔜 이제 `/solve-problem`을 실행해서 문제를 해결하세요!
+🔜 이제 `/solve-problem`을 실행하세요!
+   → 문제에 맞는 방법론(직행/설계/스프린트/풀 엔지니어링)을 골라 해결합니다.
 ```
 
 ---
@@ -147,15 +149,17 @@ How를 부정하는 게 아니다. 그 방법이 해결하려는 **문제(What/W
 
 ## 성장 경로
 
-이 스킬에 익숙해지면, 더 촘촘한 단계가 필요할 때:
+`/define-problem`은 `/solve-problem`과 함께 가장 단순한 문제 해결 루프를 구성한다.
+`/solve-problem`에서 방법론을 선택하면 기존 스킬들이 **플러그인**으로 자동 조합된다.
 
-| 필요한 것 | 스킬 | 추가되는 것 |
-|-----------|------|------------|
-| 사례 연구, 안티패턴 조사 | `/2w-brainstorm` | 리서치 게이트, 제약조건 분석 |
-| 범위 시각화, Phase 설계 | `/1h-agile-phase` | Mermaid 다이어그램, 단계 분리 |
-| Sprint 단위 실행 관리 | `/sprint-start` | 계획, 추적, 회고 |
+| 방법론 | 사이에 끼우는 플러그인 |
+|--------|---------------------|
+| 직행 | (없음) — 가장 단순 |
+| 설계 후 실행 | `/1h-agile-phase` |
+| 스프린트 | `/1h-agile-phase` → `/sprint-start` → `/sprint-status` → `/sprint-complete` |
+| 풀 엔지니어링 | `/2w-brainstorm` → `/1h-agile-phase` → Sprint 전체 → `/record-adr` |
 
-**정의 → 해결** 루프의 본질은 같다. 단계가 더 촘촘해질 뿐이다.
+**정의 → 해결** 루프의 본질은 같다. 방법론이 올라갈수록 단계가 촘촘해질 뿐이다.
 
 ---
 
