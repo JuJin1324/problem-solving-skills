@@ -150,14 +150,14 @@ How를 부정하는 게 아니다. 그 방법이 해결하려는 **문제(What/W
 ## 성장 경로
 
 `/define-problem`은 `/solve-problem`과 함께 가장 단순한 문제 해결 루프를 구성한다.
-`/solve-problem`에서 방법론을 선택하면 기존 스킬들이 **플러그인**으로 자동 조합된다.
+`/solve-problem`에서 방법론을 선택하면 코덱스 스킬들이 **플러그인**으로 자동 조합된다.
 
-| 방법론 | 사이에 끼우는 플러그인 |
-|--------|---------------------|
+| 방법론 | 사이에 끼우는 플러그인 (코덱스 스킬) |
+|--------|--------------------------------------|
 | 직행 | (없음) — 가장 단순 |
-| 설계 후 실행 | `/1h-agile-phase` |
-| 스프린트 | `/1h-agile-phase` → `/sprint-start` → `/sprint-status` → `/sprint-complete` |
-| 풀 엔지니어링 | `/2w-brainstorm` → `/1h-agile-phase` → Sprint 전체 → `/record-adr` |
+| 설계 후 실행 | `design-phase` |
+| 스프린트 | `design-phase` → `design-implementation` → `execute-implementation` → `monitor-sprint` |
+| 풀 엔지니어링 | `define-2w` → `design-phase` → `design-impl` → `execute-impl` → `design-test` → `execute-test` → `monitor-sprint` + `record-adr` + `manage-experience` |
 
 **정의 → 해결** 루프의 본질은 같다. 방법론이 올라갈수록 단계가 촘촘해질 뿐이다.
 

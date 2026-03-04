@@ -43,23 +43,28 @@ define-problem ──→ [ 플러그인 ] ──→ solve-problem
                   방법론이 결정함
 ```
 
-기존 스킬들은 이 사이에 끼우는 **플러그인**이다:
+기존 코덱스 스킬들은 이 사이에 끼우는 **플러그인**이다:
 
-| 플러그인 | 역할 | 해당 스킬 |
-|----------|------|----------|
-| 리서치 | 사례/안티패턴 조사 | `/2w-brainstorm` (deep research) |
-| 설계 | 범위/구조 시각화 | `/1h-agile-phase` |
-| 실행관리 | Sprint 계획/추적/회고 | `/sprint-start` `/sprint-status` `/sprint-complete` |
-| 기록 | 의사결정 아카이브 | `/record-adr` |
+| 분류 | 코덱스 스킬 | 역할 |
+|------|-----------|------|
+| **리서치** | `define-2w` | 사례 연구 게이트 + 안티패턴 리서치 게이트 |
+| **설계** | `design-phase` | Phase/US 구조, 범위(In/Out/Unknown), 메트릭 |
+| | `design-implementation` | 구현 설계 (Sequence/Flowchart/C4, 인터페이스) |
+| | `design-test` | 테스트 케이스 설계 (P0/P1/P2 우선순위) |
+| **실행** | `execute-implementation` | 코드 작성, 컨벤션 체크, 검증 |
+| | `execute-test` | 테스트 실행, 결함 분석, 재검증 |
+| **관리** | `monitor-sprint` | 상태 대시보드, 리스크 레이더, 회고 |
+| **기록** | `record-adr` | 의사결정 아카이브 (자동 감지 + 명시적 호출) |
+| | `manage-experience` | 경험/패턴 축적 (시드 → 검증 → 승격) |
 
 ### 방법론 선택지
 
-| 방법론 | 언제 쓸까 | 플러그인 | 예상 소요 |
-|--------|----------|---------|----------|
+| 방법론 | 언제 쓸까 | 끼우는 플러그인 (코덱스 스킬) | 예상 소요 |
+|--------|----------|------------------------------|----------|
 | **직행** | 간단, 명확, 바로 할 수 있음 | (없음) | 분~시간 |
-| **설계 후 실행** | 방향이 여러 개, 범위 통제 필요 | +설계 | 시간~반나절 |
-| **스프린트** | 며칠 이상, 진행 추적 필요 | +설계 +실행관리 | 일~주 |
-| **풀 엔지니어링** | 복잡한 시스템, 리스크 관리 필요 | +리서치 +설계 +실행관리 +기록 | 주~ |
+| **설계 후 실행** | 방향이 여러 개, 범위 통제 필요 | `design-phase` | 시간~반나절 |
+| **스프린트** | 며칠 이상, 진행 추적 필요 | `design-phase` → `design-implementation` → `execute-implementation` → `monitor-sprint` | 일~주 |
+| **풀 엔지니어링** | 복잡한 시스템, 리스크 관리 필요 | `define-2w` → `design-phase` → `design-implementation` → `execute-implementation` → `design-test` → `execute-test` → `monitor-sprint` + `record-adr` + `manage-experience` | 주~ |
 
 ---
 
@@ -99,18 +104,19 @@ define-problem ──→ [ 플러그인 ] ──→ solve-problem
 
 1️⃣ 직행 — 바로 1-3단계로 해결
    → 문제가 명확하고 바로 시작할 수 있을 때
+   → 플러그인: 없음
 
-2️⃣ 설계 후 실행 — 범위/구조를 먼저 그린 후 해결
+2️⃣ 설계 후 실행 — Phase/US 구조를 먼저 잡은 후 해결
    → 방향이 여러 개이거나 범위 통제가 필요할 때
-   → 플러그인: /1h-agile-phase
+   → 플러그인: design-phase
 
-3️⃣ 스프린트 — Sprint 단위로 계획하고 추적하며 해결
+3️⃣ 스프린트 — 설계 → 구현 설계 → 코드 → Sprint 관리
    → 며칠 이상 걸리거나 진행 관리가 필요할 때
-   → 플러그인: /1h-agile-phase → /sprint-start → /sprint-status → /sprint-complete
+   → 플러그인: design-phase → design-implementation → execute-implementation → monitor-sprint
 
-4️⃣ 풀 엔지니어링 — 리서치부터 설계, 실행, 기록까지 전부
+4️⃣ 풀 엔지니어링 — 리서치부터 테스트, 기록까지 전부
    → 복잡한 시스템이거나 리스크 관리가 필요할 때
-   → 플러그인: /2w-brainstorm → /1h-agile-phase → /sprint-start → ... → /record-adr
+   → 플러그인: define-2w → design-phase → design-impl → execute-impl → design-test → execute-test → monitor-sprint + record-adr + manage-experience
 
 💡 AI 추천: [N번 - 이유 1줄]
 ```
@@ -131,42 +137,45 @@ define-problem ──→ [ 플러그인 ] ──→ solve-problem
 #### 설계 후 실행 선택 시
 
 ```
-📐 먼저 범위와 구조를 잡겠습니다.
+📐 먼저 Phase/US 구조를 잡겠습니다.
 
-→ `/1h-agile-phase` 실행
+→ design-phase 실행 (Phase/US 구조, 범위, 메트릭)
 → 완료 후 이 스킬로 돌아와 해결 단계를 설계합니다.
 ```
 
-`/1h-agile-phase` 완료 후 4단계로 진행.
+`design-phase` 완료 후 4단계로 진행.
 
 #### 스프린트 선택 시
 
 ```
-🏃 Sprint로 관리하며 해결하겠습니다.
+🏃 설계부터 구현까지 Sprint로 관리합니다.
 
-→ `/1h-agile-phase` 실행 (범위/Phase 설계)
-→ `/sprint-start` 실행 (Sprint 계획)
-→ Sprint 실행 중 `/sprint-status`로 추적
-→ 완료 시 `/sprint-complete`로 회고
+→ design-phase 실행 (Phase/US 구조, 범위 확정)
+→ design-implementation 실행 (Sequence/Flowchart/C4, 인터페이스 정의)
+→ execute-implementation 실행 (코드 작성, 컨벤션 체크)
+→ monitor-sprint 실행 (상태 대시보드, 리스크, 회고)
 → 이후 이 스킬로 돌아와 최종 정리합니다.
 ```
 
-Sprint 완료 후 7단계(배운 점)로 진행.
+`monitor-sprint` 회고 완료 후 7단계(배운 점)로 진행.
 
 #### 풀 엔지니어링 선택 시
 
 ```
-🔬 체계적으로 리서치부터 시작하겠습니다.
+🔬 리서치부터 테스트까지 전 과정을 수행합니다.
 
-→ `/2w-brainstorm` 실행 (깊은 리서치 포함)
-→ `/1h-agile-phase` 실행 (범위/Phase 설계)
-→ `/sprint-start` 실행 (Sprint 계획)
-→ Sprint 실행 중 의사결정 시 `/record-adr`
-→ 완료 시 `/sprint-complete`로 회고
+→ define-2w 실행 (사례 연구 게이트 + 안티패턴 리서치 게이트)
+→ design-phase 실행 (Phase/US 구조, 범위, 메트릭)
+→ design-implementation 실행 (구현 설계, 다이어그램)
+→ execute-implementation 실행 (코드 작성)
+→ design-test 실행 (테스트 케이스 설계, P0/P1/P2)
+→ execute-test 실행 (테스트 실행, 결함 분석)
+→ monitor-sprint 실행 (상태/리스크 추적, 회고)
+→ 횡단: record-adr (의사결정 시 자동 감지), manage-experience (경험 축적)
 → 이후 이 스킬로 돌아와 최종 정리합니다.
 ```
 
-Sprint 완료 후 7단계(배운 점)로 진행.
+`monitor-sprint` 회고 완료 후 7단계(배운 점)로 진행.
 
 ### 4단계. 해결 단계 설계 (직행/설계 후 실행)
 
