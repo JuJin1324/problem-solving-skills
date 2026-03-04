@@ -5,11 +5,14 @@ MODE="dry-run"
 PROJECT_ROOT="."
 LOOP=""
 OVERWRITE=0
-PROFILE="eda-poc-default"
+PROFILE="legacy-generic"
 
-SOURCE_2W="2w-brainstorm.md"
-SOURCE_CASE="eda-kafka-case-studies.md"
-SOURCE_HOW="how-diagram.md"
+SOURCE_2W=""
+SOURCE_CASE=""
+SOURCE_HOW=""
+SOURCE_2W_SET=0
+SOURCE_CASE_SET=0
+SOURCE_HOW_SET=0
 
 REPORT_PATH=""
 
@@ -23,10 +26,10 @@ Options:
   --loop <N>                   Target loop number (default: auto-detect latest, fallback 0)
   --mode <dry-run|apply>       Execution mode (default: dry-run)
   --overwrite                  Allow overwriting existing destination files (apply mode)
-  --profile <name>             Mapping profile (default: eda-poc-default)
-  --source-2w <path>           Legacy 2W source path (default: 2w-brainstorm.md)
-  --source-case-study <path>   Legacy case study source path (default: eda-kafka-case-studies.md)
-  --source-how <path>          Legacy how diagram source path (default: how-diagram.md)
+  --profile <name>             Mapping profile (default: legacy-generic)
+  --source-2w <path>           Legacy 2W source path (override auto-detect)
+  --source-case-study <path>   Legacy case study source path (override auto-detect)
+  --source-how <path>          Legacy how diagram source path (override auto-detect)
   --report-path <path>         Custom report path
   -h, --help                   Show this help
 EOF
@@ -75,6 +78,29 @@ detect_loop() {
   fi
 }
 
+resolve_auto_source() {
+  local project_root_abs="$1"
+  shift
+  local candidates=("$@")
+  local candidate
+  local resolved
+  local expanded
+
+  shopt -s nullglob
+  for candidate in "${candidates[@]}"; do
+    expanded=("${project_root_abs}"/${candidate})
+    for resolved in "${expanded[@]}"; do
+      if [[ -f "${resolved}" ]]; then
+        printf '%s\n' "${resolved}"
+        shopt -u nullglob
+        return 0
+      fi
+    done
+  done
+  shopt -u nullglob
+  printf '\n'
+}
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --project-root)
@@ -99,14 +125,17 @@ while [[ $# -gt 0 ]]; do
       ;;
     --source-2w)
       SOURCE_2W="${2:-}"
+      SOURCE_2W_SET=1
       shift 2
       ;;
     --source-case-study)
       SOURCE_CASE="${2:-}"
+      SOURCE_CASE_SET=1
       shift 2
       ;;
     --source-how)
       SOURCE_HOW="${2:-}"
+      SOURCE_HOW_SET=1
       shift 2
       ;;
     --report-path)
@@ -130,10 +159,14 @@ if [[ "${MODE}" != "dry-run" && "${MODE}" != "apply" ]]; then
   exit 1
 fi
 
-if [[ "${PROFILE}" != "eda-poc-default" ]]; then
-  echo "Unsupported profile: ${PROFILE}" >&2
-  exit 1
-fi
+case "${PROFILE}" in
+  legacy-generic|eda-poc-default)
+    ;;
+  *)
+    echo "Unsupported profile: ${PROFILE}" >&2
+    exit 1
+    ;;
+esac
 
 if [[ ! -d "${PROJECT_ROOT}" ]]; then
   echo "Project root not found: ${PROJECT_ROOT}" >&2
@@ -158,9 +191,48 @@ else
   REPORT_PATH="$(abs_path "${PROJECT_ROOT_ABS}" "${REPORT_PATH}")"
 fi
 
-SRC_2W="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_2W}")"
-SRC_CASE="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_CASE}")"
-SRC_HOW="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_HOW}")"
+if [[ "${SOURCE_2W_SET}" -eq 1 ]]; then
+  SRC_2W="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_2W}")"
+else
+  SRC_2W="$(
+    resolve_auto_source "${PROJECT_ROOT_ABS}" \
+      "2w-brainstorm.md" \
+      "docs/planning/2w-brainstorm.md" \
+      "problems/*/2w-brainstorm.md"
+  )"
+fi
+
+if [[ "${SOURCE_CASE_SET}" -eq 1 ]]; then
+  SRC_CASE="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_CASE}")"
+else
+  SRC_CASE="$(
+    resolve_auto_source "${PROJECT_ROOT_ABS}" \
+      "2w-case-study.md" \
+      "2w-case-studies.md" \
+      "case-study.md" \
+      "case-studies.md" \
+      "eda-kafka-case-studies.md" \
+      "docs/planning/2w-case-study.md" \
+      "docs/planning/case-studies.md" \
+      "docs/planning/eda-kafka-case-studies.md" \
+      "problems/*/2w-case-study.md" \
+      "problems/*/case-studies.md" \
+      "problems/*/eda-kafka-case-studies.md"
+  )"
+fi
+
+if [[ "${SOURCE_HOW_SET}" -eq 1 ]]; then
+  SRC_HOW="$(abs_path "${PROJECT_ROOT_ABS}" "${SOURCE_HOW}")"
+else
+  SRC_HOW="$(
+    resolve_auto_source "${PROJECT_ROOT_ABS}" \
+      "how-diagram.md" \
+      "1h-agile-phase.md" \
+      "docs/planning/how-diagram.md" \
+      "docs/planning/1h-agile-phase.md" \
+      "problems/*/how-diagram.md"
+  )"
+fi
 
 DEST_2W="${TARGET_LOOP_DIR}/01-define-2w.md"
 DEST_CASE="${TARGET_LOOP_DIR}/02-define-2w-case-study.md"
@@ -184,6 +256,13 @@ count_would_skip=0
 for i in "${!srcs[@]}"; do
   src="${srcs[$i]}"
   dest="${dests[$i]}"
+
+  if [[ -z "${src}" ]]; then
+    statuses+=("missing_source")
+    notes+=("source file not found (auto-detect)")
+    count_missing=$((count_missing + 1))
+    continue
+  fi
 
   if [[ ! -f "${src}" ]]; then
     statuses+=("missing_source")

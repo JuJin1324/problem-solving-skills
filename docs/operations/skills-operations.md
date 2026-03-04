@@ -29,7 +29,7 @@ flowchart LR
 - `record-adr`: 기술/아키텍처 의사결정을 ADR 문서로 기록하고 추적한다.
 - `sync-agent-skills`: 에이전트 간 스킬 디렉터리를 현재 에이전트 형식으로 동기화한다.
 - `manage-experience`: 스킬별 경험 문서를 초기화하고 실전 패턴을 누적/정제한다.
-- `migrate-legacy-artifacts`: 구버전 산출물을 신버전 산출물 경로로 안전하게 마이그레이션한다.
+- `migrate-legacy-artifacts`: 구버전 산출물을 프로젝트 공통 자동 탐색으로 신버전 산출물 경로에 안전하게 마이그레이션한다.
 
 ## 산출물 저장 경로 (통합 트리)
 ```text

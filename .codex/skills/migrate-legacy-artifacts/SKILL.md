@@ -1,6 +1,6 @@
 ---
 name: migrate-legacy-artifacts
-description: "구버전 스킬 산출물(예: 2w-brainstorm.md, eda-kafka-case-studies.md, how-diagram.md)을 신버전 loop 산출물 경로로 안전하게 변환하는 운영 스킬. dry-run 기본, apply 선택."
+description: "구버전 스킬 산출물(예: 2w-brainstorm.md, case-studies.md, how-diagram.md)을 신버전 loop 산출물 경로로 안전하게 변환하는 운영 스킬. 프로젝트 공통 자동 탐색 + dry-run 기본."
 ---
 
 # Migrate Legacy Artifacts
@@ -14,16 +14,20 @@ description: "구버전 스킬 산출물(예: 2w-brainstorm.md, eda-kafka-case-s
 - `apply`에서도 기본은 덮어쓰기 금지이며, `--overwrite`를 명시한 경우에만 덮어쓴다.
 - 마이그레이션 결과를 리포트 파일로 남긴다.
 
-## 기본 매핑 (eda-poc-default)
-- `2w-brainstorm.md` -> `.agile/loops/loop-vN/01-define-2w.md`
-- `eda-kafka-case-studies.md` -> `.agile/loops/loop-vN/02-define-2w-case-study.md`
-- `how-diagram.md` -> `.agile/loops/loop-vN/04-design-phase.md`
+## 기본 매핑 (legacy-generic)
+- `2W 문서` 후보 자동 탐색 -> `.agile/loops/loop-vN/01-define-2w.md`
+  - 우선순위 예: `2w-brainstorm.md`, `docs/planning/2w-brainstorm.md`, `problems/*/2w-brainstorm.md`
+- `사례 연구 문서` 후보 자동 탐색 -> `.agile/loops/loop-vN/02-define-2w-case-study.md`
+  - 우선순위 예: `2w-case-study*.md`, `case-studies.md`, `eda-kafka-case-studies.md`, `docs/planning/*`
+- `How/Phase 문서` 후보 자동 탐색 -> `.agile/loops/loop-vN/04-design-phase.md`
+  - 우선순위 예: `how-diagram.md`, `1h-agile-phase.md`, `docs/planning/*`, `problems/*`
 
 ## 입력
 - 대상 프로젝트 루트 경로 (`--project-root`, 예: `../eda-poc`)
 - 루프 번호 (`--loop`, 생략 시 자동 감지)
 - 실행 모드 (`--mode dry-run|apply`)
 - 덮어쓰기 여부 (`--overwrite`)
+- 프로필 (`--profile`, 기본: `legacy-generic`)
 - 소스 파일 경로 커스터마이징(선택):
   - `--source-2w`
   - `--source-case-study`
@@ -57,7 +61,7 @@ description: "구버전 스킬 산출물(예: 2w-brainstorm.md, eda-kafka-case-s
 ### Step 2. Dry-run 실행 (필수 권장)
 ```bash
 bash .codex/skills/migrate-legacy-artifacts/scripts/migrate_legacy_artifacts.sh \
-  --project-root ../eda-poc \
+  --project-root ../my-project \
   --mode dry-run
 ```
 
@@ -70,14 +74,14 @@ bash .codex/skills/migrate-legacy-artifacts/scripts/migrate_legacy_artifacts.sh 
 충돌/누락을 확인한 뒤 실제 변환을 실행한다.
 ```bash
 bash .codex/skills/migrate-legacy-artifacts/scripts/migrate_legacy_artifacts.sh \
-  --project-root ../eda-poc \
+  --project-root ../my-project \
   --mode apply
 ```
 
 덮어쓰기가 필요하면 명시적으로 실행:
 ```bash
 bash .codex/skills/migrate-legacy-artifacts/scripts/migrate_legacy_artifacts.sh \
-  --project-root ../eda-poc \
+  --project-root ../my-project \
   --mode apply \
   --overwrite
 ```

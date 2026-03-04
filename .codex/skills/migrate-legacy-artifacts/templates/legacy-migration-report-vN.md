@@ -4,16 +4,16 @@
 - 생성 시각:
 - 모드: dry-run | apply
 - 프로젝트 루트:
-- 프로필: eda-poc-default
+- 프로필: legacy-generic | eda-poc-default
 - 대상 루프:
 - 덮어쓰기 옵션:
 
 ## 매핑 결과
 | 항목 | 레거시 소스 | 신버전 대상 | 상태 | 메모 |
 |---|---|---|---|---|
-| 2W Brainstorm | `2w-brainstorm.md` | `.agile/loops/loop-vN/01-define-2w.md` |  |  |
-| Case Study | `eda-kafka-case-studies.md` | `.agile/loops/loop-vN/02-define-2w-case-study.md` |  |  |
-| How Diagram | `how-diagram.md` | `.agile/loops/loop-vN/04-design-phase.md` |  |  |
+| 2W Brainstorm | `auto-detected or --source-2w` | `.agile/loops/loop-vN/01-define-2w.md` |  |  |
+| Case Study | `auto-detected or --source-case-study` | `.agile/loops/loop-vN/02-define-2w-case-study.md` |  |  |
+| How Diagram | `auto-detected or --source-how` | `.agile/loops/loop-vN/04-design-phase.md` |  |  |
 
 ## 요약
 - copied:
