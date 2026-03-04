@@ -47,14 +47,15 @@ flowchart LR
 │  └─ legacy-migration-report-vN.md
 └─ loops/
    └─ loop-vN/
-      ├─ 01-define-2w.md
-      ├─ 02-define-2w-case-study.md
-      ├─ 03-define-2w-patterns.md
-      ├─ 04-design-phase.md
-      ├─ 05-design-implementation.md
-      ├─ 06-execute-implementation-us-N.M.md
-      ├─ 07-design-test-us-N.M.md
-      ├─ 08-execute-test-us-N.M.md
+      ├─ 01-01-define-2w-phase-briefing.md
+      ├─ 01-02-define-2w.md
+      ├─ 01-03-define-2w-case-study.md
+      ├─ 01-04-define-2w-patterns.md
+      ├─ 02-design-phase.md
+      ├─ 03-design-implementation.md
+      ├─ 04-execute-implementation-us-N.M.md
+      ├─ 05-design-test-us-N.M.md
+      ├─ 06-execute-test-us-N.M.md
       └─ sprint/
          ├─ 01-sprint-plan.md
          ├─ 02-sprint-status.md
