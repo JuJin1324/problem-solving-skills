@@ -21,6 +21,7 @@ flowchart LR
 3. 각 단계는 전용 산출 디렉터리를 소유한다.
 4. 파일명은 실행 주체 자율이지만, 산출물은 반드시 해당 단계 디렉터리에 저장한다.
 5. 다음 적용 스킬 선택은 `framework-applied-skills.md`의 적용 순서를 기준으로 한다.
+6. `YAGNI`: 현재 스프린트 의사결정/검증에 필요하지 않은 산출물·설계·자동화는 만들지 않는다.
 
 ## 시동 규칙 (Bootstrap)
 1. Bootstrap은 단계(`C1/C2/C3`)가 아닌 준비 작업이다.
@@ -104,5 +105,6 @@ flowchart LR
 4. `다음 단계` 결정은 `framework-applied-skills.md`의 적용 순서와 충돌하면 안 된다.
 
 ## 변경 이력
+- `v2.1.1` (2026-03-05): 프레임워크 원칙에 `YAGNI`(필요 시점 이전 구현/산출물 생성 금지) 항목을 추가함.
 - `v2.1.0` (2026-03-05): `Control` 단계를 제거하고 `Delivery`/`Learning` 책임을 분리하는 3단계 운영 기준을 확정함.
 - `v2.0.0` (2026-03-05): 단계 모델을 `Direction/Delivery/Learning` 3단계로 단순화하고, `Bootstrap` 시동 규칙을 추가했으며 단계 산출 경로를 `1-direction/2-delivery/3-learning`으로 재정의함.
