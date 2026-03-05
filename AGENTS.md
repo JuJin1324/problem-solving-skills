@@ -15,9 +15,10 @@
 5. `execute-implementation`: 코드 구현/검증/문서화
 6. `design-test`: 테스트 설계
 7. `execute-test`: 테스트 구현/실행/분석
-8. `monitor-sprint`: 진행 상황 갱신/회고 및 다음 루프 판단
+8. `monitor-sprint`: 진행 상황 갱신/재평가
+9. `review-sprint`: Sprint 회고 및 다음 스프린트 시작/종료 판단
 
 ## Codex Skill Location
 - Codex 스킬 경로: `.codex/skills/<skill-name>/SKILL.md`
 - 레거시 Codex 스킬 경로: `.codex/skills-legacy/<skill-name>/SKILL.md` (기본 미사용)
-- 스킬 결과는 문서(`*.md`) 중심으로 남기고, Sprint 산출물은 `.agile/loops/loop-vN/sprint/`에 기록한다.
+- 스킬 결과는 문서(`*.md`) 중심으로 남기고, Sprint 산출물은 `.agile/sprints/sprint-N/{1-direction,2-delivery,3-learning}/`에 기록한다.

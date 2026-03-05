@@ -12,7 +12,8 @@
 5. `execute-implementation`: 코드 구현 + 검증 + 실행 문서화
 6. `design-test`: 테스트 설계(정상/실패/엣지, 우선순위)
 7. `execute-test`: 테스트 구현/실행/실패 분석
-8. `monitor-sprint`: Sprint 상태 갱신/회고 및 다음 루프 판단
+8. `monitor-sprint`: Sprint 상태 갱신/재평가
+9. `review-sprint`: Sprint 회고 및 다음 스프린트 시작/종료 판단
 
 ## 디렉터리 구조
 - `.claude/skills/`: Claude Code 스킬 (`<skill>/SKILL.md`)
@@ -24,7 +25,7 @@
 - `scripts/sync-skills.sh`: 기존 작업공간 스킬 동기화 스크립트
 
 ## 포함 스킬
-- 메인 워크플로우: `define-2w`, `design-phase`, `monitor-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`
+- 메인 워크플로우: `define-2w`, `design-phase`, `monitor-sprint`, `design-implementation`, `execute-implementation`, `design-test`, `execute-test`, `review-sprint`
 - 보조/운영: `record-adr`, `sync-agent-skills`, `manage-experience`
 - 레거시(별도 경로): `sprint-start`, `sprint-complete`, `us-complete`, `2w-brainstorm`, `1h-agile-phase`
 
