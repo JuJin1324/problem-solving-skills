@@ -28,16 +28,10 @@
 7. `review-sprint`: `3-learning/`에 회고/학습 정리
 8. Sprint 종료 후 `define-2w` 또는 `design-phase`로 다음 스프린트 진입
 
-## Legacy Skills
+## Legacy Status
 
-- 레거시 스킬은 `.codex/skills-legacy/`로 분리했다.
-- 현재 위치:
-  - `2w-brainstorm`
-  - `1h-agile-phase`
-  - `sprint-start`
-  - `sprint-complete`
-  - `us-complete`
-- 매핑/전환 기준은 `docs/skill-ops/skills-lifecycle.md`를 참고한다.
+- 현재 저장소에서는 레거시 스킬과 레거시 전용 산출물을 제거했다.
+- 과거 산출물 이관이 필요하면 `migrate-legacy-artifacts`를 사용한다.
 
 ## 형식 규칙
 

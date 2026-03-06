@@ -13,6 +13,7 @@ description: "Delivery 단계 산출물을 기반으로 Sprint 회고/학습 문
 - Modules: `M-PIPELINE-CONTRACT`
 
 핵심 원칙:
+- 문서는 단절된 목록보다 `문제 -> 판단 이유 -> 실행 -> 검증/리스크 -> 다음 인계` 흐름이 이어지도록 작성한다.
 - 회고/학습 산출물은 `3-learning/` 디렉터리에만 기록한다.
 - 본 스킬은 회고/학습/다음 스프린트 결정에 집중한다.
 - Sprint 상태 집계/진행률 계산은 `monitor-sprint` 책임이다.

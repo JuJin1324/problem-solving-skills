@@ -1,206 +1,127 @@
 # Design Implementation - [문제명]
 
-## 한눈에 결론
-- 설계 핵심 결론:
-- 확정된 설계 결정 2~3개:
-- 바로 구현할 항목:
-- 핵심 리스크:
+## 1) 해결해야 할 문제와 목표
+이번 설계에서 무엇을 해결하려는지 먼저 문장으로 정리한다.  
+핵심은 "지금 막히는 지점이 무엇인지"와 "이번 문서가 어떤 실행 결정을 내려주는지"가 이어져 보이게 쓰는 것이다.
+
+### 1-1. 현재 상황
+- 현재 어떤 문제가 남아 있는지:
+- 이 문제가 실무에서 어떤 비용/지연을 만드는지:
+
+### 1-2. 이번 설계 목표
+- 이번 문서가 끝나면 무엇이 실행 가능해지는지:
+- 이번 설계의 핵심 판단 2~3개:
+
+### 1-3. 포함/제외 범위
+| 구분 | 내용 |
+| --- | --- |
+| In Scope |  |
+| Out of Scope |  |
 
 ---
 
-## 1) 구조 설계
-### 1-1. 기능과 경계
-- 핵심 기능:
-- 포함(In Scope):
-- 제외(Out of Scope):
+## 2) 핵심 설계 판단과 이유
+결론만 나열하지 말고, 각 결정을 왜 채택했는지와 감수하는 trade-off를 함께 적는다.
 
-### 1-2. 다이어그램 (Business-first, 다중 허용)
-- 작성 원칙:
-  - 비즈니스 흐름 다이어그램을 먼저 제시한다. (필수, 1개 이상)
-  - 기술 흐름 다이어그램은 구현 리스크를 줄이기 위한 보조로 추가한다. (선택, 0개 이상)
-  - 동일 타입 다이어그램도 시나리오별로 여러 개 작성할 수 있다.
-  - 동일 문제 축(예: EDA 주문 팬아웃 비교)을 유지하면 `.agile/sprints/sprint-0/1-direction/design-phase.md` 기준본을 우선 재사용하고 이번 US의 변경점만 메모한다.
+| Decision | 왜 이 결정을 했는가 | 기대 효과 | Trade-off |
+| --- | --- | --- | --- |
+|  |  |  |  |
 
-#### A. 비즈니스 흐름 다이어그램 (필수, 1개 이상)
-##### A-1. 동기 방식 비즈니스 흐름 (Before, 기준본 재사용 권장)
-```mermaid
-sequenceDiagram
-    participant User as 사용자
-    participant OS as 주문
-    participant NS as 알림
-    participant SS as 배송
+---
 
-    User->>OS: POST /orders
-    OS->>OS: 재고 차감 (DB)
+## 3) 흐름 설계 (Business-first)
+이 섹션은 다이어그램 자체보다 "흐름이 무엇을 증명하는지"를 먼저 설명한다.
 
-    par 병렬 REST 호출 (CompletableFuture)
-        OS->>NS: REST: 알림 발송 (고정 1s)
-    and
-        OS->>SS: REST: 배송 접수 (고정 1s)
-    end
-    NS-->>OS: 완료
-    SS-->>OS: 완료
-    OS-->>User: 주문 완료 응답 (약 1s+)
+### 3-1. 비즈니스 흐름 (필수, 1개 이상)
+이 흐름으로 무엇이 개선되는지 2~4문장으로 먼저 적고 다이어그램을 제시한다.
 
-    Note over OS,SS: 문제: 병렬 REST 호출이더라도 사용자는 모든 후속 처리 완료까지 대기 (블로킹)<br/>알림/배송 중 하나라도 장애 시 주문 전체 실패
-```
-
-##### A-2. 비동기 방식 비즈니스 흐름 (After, 기준본 재사용 권장)
-```mermaid
-sequenceDiagram
-    participant User as 사용자
-    participant OA as 주문
-    participant K as Kafka
-    participant NA as 알림 Consumer
-    participant SA as 배송 Consumer
-    participant DLQ as Dead Letter Queue
-
-    User->>OA: POST /orders
-    OA->>OA: 재고 차감 (DB)
-    OA->>K: OrderCompleted 이벤트 발행
-    OA-->>User: 주문 완료 응답 (즉시)
-
-    par Fan-out: 동시 처리
-        K->>NA: 이벤트 전달 (Consumer Group A)
-        NA->>NA: 알림 발송 (고정 1s)
-    and
-        K->>SA: 이벤트 전달 (Consumer Group B)
-        SA->>SA: 배송 접수 (고정 1s)
-    end
-
-    alt 후속 처리 실패 시
-        NA->>DLQ: 실패 메시지 격리
-        Note over DLQ: 복구 후 재처리
-    end
-
-    Note over OA,User: 효과 1: 주문 응답은 재고 차감까지만 대기 (즉시 반환)<br/>효과 2: 알림/배송이 병렬 처리 -> max(1s, 1s) = 1s<br/>효과 3: 알림 장애가 배송에 영향 없음 (장애 격리)
-```
-
-##### A-3. [선택] 추가 비즈니스 흐름 (실패/복구/보상)
-```mermaid
-sequenceDiagram
-    participant User as 사용자
-    participant Domain as 도메인 서비스
-    participant Retry as 재시도 큐
-
-    User->>Domain: 비즈니스 요청
-    alt 처리 성공
-        Domain-->>User: 완료/상태 업데이트
-    else 처리 실패
-        Domain->>Retry: 재시도 작업 등록
-        Domain-->>User: 실패 사유와 후속 조치 안내
-    end
-
-    opt 재처리 성공
-        Retry->>Domain: 재처리 트리거
-        Domain-->>User: 복구 완료 알림
-    end
-```
-
-#### B. 기술 흐름 다이어그램 (선택, 0개 이상)
-##### B-1. C4 Container (기준본 재사용 권장)
-```mermaid
-flowchart TB
-    subgraph sync["동기 (Before) — 사용자 블로킹"]
-        order_sync["order-service-sync\n(Spring Boot :8080)\n주문 API + 재고 차감"]
-        notification_sync["notification-service-sync\n(Spring Boot :8081)\n알림 발송 (고정 1s)"]
-        shipping_sync["shipping-service-sync\n(Spring Boot :8082)\n배송 접수 (고정 1s)"]
-        order_sync -- "REST 호출" --> notification_sync
-        order_sync -- "REST 호출" --> shipping_sync
-    end
-
-    subgraph async["비동기 (After) — 즉시 응답 + Fan-out"]
-        order_async["order-service-async\n(Spring Boot :8083)\n주문 API + 재고 차감 + Kafka 발행"]
-        kafka[("Kafka\nMessage Broker")]
-        notification_async["notification-service-async\n(Spring Boot :8084)\nConsumer Group A — 알림 발송 (고정 1s)"]
-        shipping_async["shipping-service-async\n(Spring Boot :8085)\nConsumer Group B — 배송 접수 (고정 1s)"]
-        order_async -- "OrderCompleted\n이벤트 발행" --> kafka
-        kafka -- "Fan-out (Group A)" --> notification_async
-        kafka -- "Fan-out (Group B)" --> shipping_async
-    end
-
-    subgraph infra["공통 인프라 (Docker Compose)"]
-        k6["k6\nLoad Test"]
-        akhq["AKHQ\nKafka UI (:18080)"]
-    end
-
-    k6 -. "부하 테스트" .-> order_sync
-    k6 -. "부하 테스트" .-> order_async
-    akhq -. "토픽/컨슈머 그룹 조회" .-> kafka
-```
-
-##### B-2. 구현 순서 Flowchart (US 전달용)
+#### A-1. 핵심 비즈니스 흐름
 ```mermaid
 flowchart TD
-  A[요청 수신] --> B{유효성 검사}
-  B -->|성공| C[도메인 처리]
-  B -->|실패| E[에러 반환]
-  C --> D[결과 반환]
+  A[시작] --> B[핵심 업무 흐름]
+  B --> C[결과]
 ```
 
-##### B-3. [선택] 추가 기술 흐름 (재시도/배포/관측성 등)
+#### A-2. 실패/지연 시 처리 흐름
 ```mermaid
 flowchart TD
-  A[기술 이벤트 시작] --> B{조건 확인}
-  B -->|정상| C[처리 계속]
-  B -->|오류| D[재시도 또는 대체 경로]
-  C --> E[종료]
-  D --> E
+  A[실행] --> B{정상 처리 여부}
+  B -->|Yes| C[완료]
+  B -->|No| D[보강/재시도]
+  D --> B
 ```
 
-## 2) 구현 전달 정보
-### 2-1. US 상세 스텝 설계 (필수)
+### 3-2. 기술 흐름 (선택)
+기술 다이어그램을 생략했다면 "왜 생략해도 실행 리스크가 낮은지"를 문장으로 남긴다.
+
+#### B-1. 기술 구조(선택)
+```mermaid
+flowchart TD
+  A[입력] --> B[처리]
+  B --> C[출력]
+```
+
+#### B-2. 구현 순서(선택)
+```mermaid
+flowchart TD
+  A[1단계] --> B[2단계]
+  B --> C[3단계]
+```
+
+---
+
+## 4) 실행 인계 (execute-implementation 입력)
+이 섹션은 구현자가 "왜 이 순서로 해야 하는지"를 이해할 수 있게 작성한다.
+
+### 4-1. US 스텝 설계
 | Step ID | 목표 | 선행조건/입력 | 핵심 작업 | 산출물 | 완료 기준(DoD) | 검증 방법 |
 | --- | --- | --- | --- | --- | --- | --- |
 | `1.1.1-a` |  |  |  |  |  |  |
 | `1.1.1-b` |  |  |  |  |  |  |
 | `1.1.1-c` |  |  |  |  |  |  |
 
-스텝 작성 규칙:
-- 기본 2~5개 스텝으로 분해한다.
-- 각 스텝은 하나의 변경축만 다루고, 검증 가능해야 한다.
-- Step ID는 설계 문서와 실행 문서(`execute-implementation-us-N.M-step-x.x.x-*.md`)에서 동일하게 사용한다.
+스텝을 나열한 뒤, 왜 이 순서가 맞는지 2~4문장으로 설명한다.
 
-### 2-2. 구현 전달 체크리스트
-- 구현 우선순위:
-- 대표 1개 선행 + 확장 게이트:
-  - 기본 순서: `sync 대표 -> sync 확장 -> async 대표 -> async 확장`
-  - Sync 대표 서비스(먼저 구현):
-  - Async 대표 서비스(먼저 구현):
-  - 리뷰 게이트 통과 조건:
-  - 자동 확장 대상/방식:
-- 테스트 포인트:
-- 리스크/완화:
-- 선행 의존사항:
-- US 루프 순서: `execute-implementation -> design-test -> execute-test -> monitor-sprint`
+### 4-2. 검증 전략과 리스크
+| 항목 | 내용 |
+| --- | --- |
+| 구현 우선순위 |  |
+| 리뷰 게이트 통과 조건 |  |
+| 테스트 포인트 |  |
+| 주요 리스크와 완화 |  |
+| 선행 의존사항 |  |
+| US 루프 순서 | `execute-implementation -> design-test -> execute-test -> monitor-sprint` |
 
-## 3) 인터페이스와 ADR
-### 3-1. 인터페이스 정의
-- 입력:
-- 출력:
-- 이벤트/메시지:
+---
 
-### 3-2. ADR 요약
+## 5) 인터페이스와 ADR
+### 5-1. 인터페이스 정의
+| 구분 | 내용 |
+| --- | --- |
+| 입력 |  |
+| 출력 |  |
+| 이벤트/메시지 |  |
+
+### 5-2. ADR 요약
 | ADR | Decision | Why | Trade-off |
 | --- | --- | --- | --- |
 | ADR-001 |  |  |  |
 
-## 4) 대상 범위와 목표
-- 대상 US (기본 1개):
-- 동시 설계 여부: 단일 US | 다중 US(예외)
-- 다중 US 예외 근거(해당 시):
-- 이번 설계 목표:
-- 완료 기준:
-- 제외 범위:
+---
 
-## 5) 기술 스택과 전제
-- 기술 스택 문서: `.agile/context/tech-stack.md`
-- 사용 방식: 기존 문서 재사용 | 일부 수정 | 신규 생성
-- 재사용 우선 검토 결과: `tech-stack.md`의 `재사용 우선 후보 비교` 및 `직접 구현 예외 검토` 섹션 참조
-- 설계 전제/제약:
+## 6) 완료 조건과 다음 연결
+이번 설계가 끝났다고 판단하는 기준과, 다음 스킬로 어떻게 인계하는지 문장으로 마무리한다.
+
+| 항목 | 내용 |
+| --- | --- |
+| 대상 US |  |
+| 완료 기준(DoD) |  |
+| 제외 범위 |  |
+| 다음 루프 | `execute-implementation -> design-test -> execute-test -> monitor-sprint` |
 
 ---
 
-## 부록) 운영 로그 (필요 시만 작성)
-- C4 판단 게이트: AI 권장 | 사용자 선택 | 근거
+## 부록) 운영 로그 (필요 시)
+- 브랜치/스프린트 정합성:
+- C4 판단 게이트(작성/생략 + 이유):
 - 설계 변경 이력:
