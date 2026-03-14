@@ -1,6 +1,12 @@
 # Codex Skills
 
-이 디렉터리는 Codex용 프로젝트 스킬 모음입니다.
+이 디렉터리는 Codex v2 아카이브입니다.
+
+## 구조
+
+- `project/`: Codex v2 루트 문서 아카이브(`README.md`, `problem-solving-principles.md`)
+- `skills/`: Codex v2 스킬 본체
+- `skill-ops/`: Codex v2 운영 문서(`framework.md`, `framework-applied-skills.md`, `principles.md`)
 
 ## Active Skills
 
@@ -43,5 +49,5 @@
 
 ## 동기화 메모
 
-- 공통 스킬 업데이트 시 `.claude/skills`, `.gemini/skills`와 함께 동기화합니다.
+- 공통 스킬 업데이트 시 당시의 `.claude/skills`, `.gemini/skills`와 함께 동기화했습니다.
 - 대량 동기화는 `sync-agent-skills` 스킬의 스크립트를 사용합니다.

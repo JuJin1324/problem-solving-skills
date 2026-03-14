@@ -1,7 +1,7 @@
-# 문제 해결 원칙 (Legacy)
+# 문제 해결 원칙 (Version 1 Archive)
 
-> 이 문서는 레거시 스킬 호환을 위해 유지됩니다.
-> 현재 Active 기준 문서는 `docs/skill-ops/framework.md`와 각 스킬의 `references/philosophy.md`입니다.
+> 이 문서는 version 1 아카이브입니다.
+> 당시 Active 기준 문서는 `docs/operations/skills-operations.md`와 각 스킬의 `references/philosophy.md`였습니다.
 
 **최종 업데이트:** 2026-02-26 (4차)
 **누적 문제 수:** 3개
