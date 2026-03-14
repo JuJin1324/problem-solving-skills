@@ -10,3 +10,6 @@ Thumbs.db
 *.tmp
 *.bak
 *~
+
+# Write-ups (personal)
+write-ups/
